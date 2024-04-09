@@ -1,11 +1,7 @@
 # Pencil2Pixel
 
 Willkommen zum Teamprojekt!
-In diesem Github Repository wird ein großer Teil Eurer Arbeit stattfinden. Bitte stellt sicher, dass Ihr
-
-Anforderungen im Teamprojekt
-
-lest.
+In diesem Github Repository wird ein großer Teil Eurer Arbeit stattfinden. Bitte stellt sicher, dass Ihr Anforderungen im Teamprojekt lest.
 
 GitHub Tour
 In Issues könnt Ihr entdeckte Fehler (Bugs), User Stories und andere Tickets festhalten, damit ihr nicht vergesst diese zu bearbeiten.
