@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pencil2Pixel</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <h1 id="headline">Pencil<span style="color: brown">2</span>Pixel</h1>
+
+    <div id="tools">
+        <div id="toolsleft">
+            <div id="current" onclick="setBrush(true)" title="Brush"><img src="icons/brush.png" style="height: 20px; margin-top: 5px;"></div>
+            <div id="eraser" onclick="setBrush(false)" title="Eraser"><img src="icons/eraser.png" style="height: 21px; margin-top: 5px;"></div>
+        </div>
+        <div id="toolsright">
+            <div id="undo" onclick="undo()" title="Undo"><img src="icons/undo.png" style="height: 20px; margin-top: 4px;"></div>
+            <div id="redo" onclick="redo()" title="Redo"><img src="icons/undo.png" style="height: 20px; margin-top: 4px;transform: scaleX(-1);"></div>
+            <div id="clear" onclick="clearCanvas()" title="Clear"><img src="icons/clear.png" style="height: 20px; margin-top: 5px"></div>
+        </div>
+    </div>
+
+    <div id="draw">
+        <div id="sizes">
+            <div id="size" onclick="setWidth(30, this)" title="30 pixels"><img src="icons/circle.png" width="30"></div>
+            <div id="size" onclick="setWidth(20, this)" title="20 pixels"><img src="icons/circle.png" width="20"></div>
+            <div id="size" onclick="setWidth(10, this)" title="10 pixels"><img src="icons/circle.png" width="10"></div>
+            <div id="selected" onclick="setWidth(5, this)" title="5 pixels"><img src="icons/circle.png" width="5"></div>
+            <div id="size" onclick="setWidth(3, this)" title="3 pixels"><img src="icons/circle.png" width="3"></div>
+        </div>
+        <canvas id="canv" width="400" height="400"></canvas>
+    </div>
+    <div id="input">
+        <textarea id="prompt" placeholder="Enter prompt here..."></textarea>
+        <div id="logo"><p style="text-shadow: 2px 2px 5px black;">Pencil<span style="color: brown">2</span>Pixel</p></div>
+        <div id="submit" onclick="generate()">Generate Images</div>
+        </div>
+
+        <div id="images" style="width: 400px; margin: auto; margin-top: 20px;"></div>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

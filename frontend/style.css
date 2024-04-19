@@ -1,0 +1,178 @@
+body {
+    background-color: rgb(40, 40, 40);
+    margin: 0;
+    text-align: center;
+}
+
+#headline {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(220, 220, 220);
+    font-style: italic;
+    font-size: 65px;
+    text-shadow: 0px 0px 25px black;
+}
+
+#draw {
+    width: 500px;
+    margin: auto;
+    display: flex;
+
+}
+
+#canv {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+#canv:hover {
+    cursor: crosshair;
+}
+
+#input {
+    margin: auto;
+    column-count: 2;
+    width: 400px;
+}
+
+#prompt {
+    height: 83px;
+    width: 230px;
+    box-shadow: 0px 0px 30px;
+    border-radius: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 10px;
+    background-color: rgb(220, 220, 220);
+    position:relative;
+    z-index:1;
+}
+
+#submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    height: 50px;
+    width: 130px;
+    background-color: brown;
+    border-radius: 5px;
+    box-shadow: 0px 0px 30px black;
+    margin-left: 60px;
+    color: white;
+    position:relative;
+    z-index:1;
+}
+
+#submit:hover {
+    box-shadow: 0px 0px 10px inset black;
+    width: 126px;
+    height: 48px;
+    cursor: pointer;
+    margin-top: 1px;
+    margin-left: 62px;
+    font-size: 15.5px;
+    background-color: rgb(151, 39, 39);
+}
+
+#logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    height: 45px;
+    width: 130px;
+    border-radius: 5px;
+    margin-left: 60px;
+    font-size: 23px;
+    font-style: italic;
+    color: white;
+    margin-bottom: 10px;
+}
+
+#brush,#eraser,#undo,#redo,#clear {
+    width: 50px;
+    height: 30px;
+    background-color: rgb(150, 150, 170);
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px;
+    position:relative;
+    z-index:1;
+}
+
+#brush:hover,#eraser:hover,#undo:hover,#redo:hover,#clear:hover,#size:hover {
+    background-color: rgb(90, 33, 33);
+}
+
+#current:hover,#selected:hover {
+    background-color: rgb(124, 50, 50);
+}
+
+#undo {
+    margin-right: 10px;
+}
+
+#redo {
+    margin-right: 10px;
+}
+
+#brush {
+    margin-right: 10px;
+}
+
+#tools {
+    column-count: 2;
+    width: 400px;
+    margin: auto;
+}
+
+#toolsleft {
+    display: flex;
+}
+
+#toolsright {
+    display: flex;
+    justify-content: right;
+}
+
+#current {
+    width: 50px;
+    height: 30px;
+    background-color: brown;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px;
+    position:relative;
+    z-index:1;
+    margin-right: 10px;
+}
+
+#sizes {
+    margin-right: 10px;
+    margin-top: 10px;
+    z-index: 1;
+}
+
+#size {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgb(150, 150, 170);
+    border-radius: 5px;
+    box-shadow: 0px 0px 8px;
+    margin-bottom: 10px;
+}
+
+#selected {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: brown;
+    border-radius: 5px;
+    box-shadow: 0px 0px 8px;
+    margin-bottom: 10px;
+}
