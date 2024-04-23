@@ -34,12 +34,23 @@
         </div>
         <canvas id="canv" width="400" height="400"></canvas>
     </div>
+
     <div id="input">
         <textarea id="prompt" placeholder="Enter prompt here..."></textarea>
-        <div id="logo"><p style="text-shadow: 2px 2px 5px black;">Pencil<span style="color: brown">2</span>Pixel</p></div>
+        <br><br>
+        <div id="dropdown">
+            <button id="dropbtn">Select Style</button>
+            <div id="dropdown-content">
+            <a id="nostyle" onclick="changeStyle(0)">No Style</a>
+            <a id="style1" onclick="changeStyle(1)">Style 1</a>
+            <a id="style2" onclick="changeStyle(2)">Style 2</a>
+            <a id="style3" onclick="changeStyle(3)">Style 3</a>
+        </div>
+          </div>
+        <!-- !this was where the style selector is now! div id="logo"><p style="text-shadow: 2px 2px 5px black;">Pencil<span style="color: brown">2</span>Pixel</p></div-->
         <div id="submit" onclick="generate()">Generate Images</div>
         </div>
-
+        
         <div id="images" style="width: 400px; margin: auto; margin-top: 20px;"></div>
     </div>
 
