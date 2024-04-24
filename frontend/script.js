@@ -130,6 +130,26 @@ const c = document.getElementById("canv");
             e.setAttribute("id", "selected");
         }
 
+        function changeStyle(n) {
+            var style = document.getElementById("nostyle").innerHTML;
+
+            switch(n) {
+                case 1:
+                    style = document.getElementById("style1").innerHTML;
+                    break;
+                case 2:
+                    style = document.getElementById("style2").innerHTML;
+                    break;
+                case 3:
+                    style = document.getElementById("style3").innerHTML;
+                    break;
+                default:
+                    break;
+            }
+
+            document.getElementById("dropbtn").innerHTML = style;
+        }
+
         function generate() {
             const img = c.toDataURL('image/png');
             const image = document.createElement("img");
