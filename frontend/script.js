@@ -1,4 +1,4 @@
-const c = document.getElementById("canv");
+        const c = document.getElementById("canv");
         const ctx = c.getContext("2d");
         const offsetX = c.getBoundingClientRect().left;
         const offsetY = c.getBoundingClientRect().top;
@@ -28,8 +28,12 @@ const c = document.getElementById("canv");
         var currentStateIndex = -1;
     
         function resetStates() {
-                states = [];
-                currentStateIndex = -1;
+            // delete all states after currentStateIndex to avoid bug
+            var states_new = [];
+            for(var i = 0; i <= currentStateIndex; i++) {
+                states_new[i] = states[i]
+            }
+            states = states_new;
         }
         
         
