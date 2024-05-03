@@ -154,6 +154,60 @@
             document.getElementById("dropbtn").innerHTML = style;
         }
 
+        function toggleBorderRadius() {
+            var dropbtn = document.getElementById("dropbtn");
+            var computedStyles = window.getComputedStyle(dropbtn);
+        
+            if (computedStyles.getPropertyValue("border-bottom-left-radius") === "5px") {
+                dropbtn.style.borderBottomLeftRadius = "0px";
+                dropbtn.style.borderBottomRightRadius = "0px";
+            } else {
+                dropbtn.style.borderBottomLeftRadius = "5px";
+                dropbtn.style.borderBottomRightRadius = "5px";
+            }
+        }
+        
+        function toggleDropdown() {
+            var dropdownContent = document.getElementById("dropdown-content");
+            
+            toggleBorderRadius();
+
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+            } else {
+                dropdownContent.style.display = "block";
+            }
+        }
+        
+        var alreadyClicked = false;
+
+        // Klicken auf Drop-Btn:
+        document.getElementById("dropbtn").addEventListener("click", function(event) {
+            toggleDropdown();
+            alreadyClicked = true;
+        });
+        
+        // Klicken auf Style-Item:
+        document.getElementById("dropdown-content").addEventListener("click", function() {
+            toggleDropdown();
+            alreadyClicked = true;
+        });
+        
+        // Hover-Funktion:
+        document.getElementById("dropdown").addEventListener("mouseenter", function() {
+            toggleDropdown();
+        });
+
+        document.getElementById("dropdown").addEventListener("mouseleave", function() {
+            if(!alreadyClicked){
+                toggleDropdown();
+                return;
+            }
+            alreadyClicked = false;
+        });
+
+        
+        
         function generate() {
             const img = c.toDataURL('image/png');
             const image = document.createElement("img");
