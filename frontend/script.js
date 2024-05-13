@@ -184,7 +184,11 @@
         // Klicken auf Drop-Btn:
         document.getElementById("dropbtn").addEventListener("click", function(event) {
             toggleDropdown();
-            alreadyClicked = true;
+            if(alreadyClicked){
+                alreadyClicked = false;
+            } else {
+                alreadyClicked = true;
+            }
         });
         
         // Klicken auf Style-Item:
@@ -205,8 +209,6 @@
             }
             alreadyClicked = false;
         });
-
-        
         
         function generate() {
             const img = c.toDataURL('image/png');
