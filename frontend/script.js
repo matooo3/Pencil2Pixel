@@ -211,6 +211,8 @@
         });
         
         function generate() {
+            document.body.style.overflow = "visible";
+
             const img = c.toDataURL('image/png');
             const image = document.createElement("img");
             image.src = img;
