@@ -273,7 +273,10 @@ body {
     border-radius: 50%;
 }
 
-.slider::-webkit-slider-thumb:hover, .slider::-moz-range-thumb:hover {
+.slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+.slider::-moz-range-thumb:hover {
     transform: scale(1.2);
 }
 
