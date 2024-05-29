@@ -7,12 +7,25 @@ import torch
 adapter = T2IAdapter.from_pretrained(
   "TencentARC/t2i-adapter-sketch-sdxl-1.0", torch_dtype=torch.float16, varient="fp16").to("cuda")
 
-photography = "photography-lora-xl_10.safetensors"
-embroidery = "embroidered_style_v1_sdxl.safetensors"
-origami = "ral-orgmi-sdxl.safetensors"
-anime = "pastel-anime-xl-latest.safetensors"
-watercolor = "watercolor_v1_sdxl.safetensors" 
-crayons = "crayons_v1_sdxl.safetensors"
+#links to the huggingface website on which the sdxl files are located
+photographyID = "f0ster/PhotographyLoRA"  
+embroideryID = "ostris/embroidery_style_lora_sdxl"
+origamiID = "RalFinger/origami-style-sdxl-lora"
+animeID = "Linaqruf/pastel-anime-xl-lora" 
+watercolorID = "ostris/watercolor_style_lora_sdxl"
+crayonsID = "ostris/crayon_style_lora_sdxl"
+
+#Names of the safetensor files on the huggingface website
+photographyName = "photography-lora-xl_10.safetensors"
+embroideryName = "embroidered_style_v1_sdxl.safetensors"
+origamiName = "ral-orgmi-sdxl.safetensors"
+animeName = "pastel-anime-xl-latest.safetensors"
+watercolorName = "watercolor_v1_sdxl.safetensors" 
+crayonsName = "crayons_v1_sdxl.safetensors"
+
+#Change modelID and modelName to get a different style
+modelID = watercolorID
+modelName = watercolorName
 
 # load euler_a scheduler
 model_id = 'stabilityai/stable-diffusion-xl-base-1.0'
@@ -23,11 +36,11 @@ pipe = StableDiffusionXLAdapterPipeline.from_pretrained(
 ).to("cuda")
 pipe.enable_xformers_memory_efficient_attention()
 
+#loads image that will be used as the sketch
 image = load_image("test_pics/house.png")
 
-# choose model name for weight
-weight = anime
-pipe.load_lora_weights("extraAdapters/", weight_name=weight)
+#loads the chosen style by the user
+pipe.load_lora_weights(modelID, weight_name=modelName)
 prompt = "house on lake, Mount Fuji in the background, sunset, realistic, 4k"
 negative_prompt = "extra digit, fewer digits, cropped, worst quality, low quality, glitch, deformed, mutated, ugly, disfigured"
 
