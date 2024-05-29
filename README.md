@@ -1,15 +1,15 @@
 # Pencil2Pixel
 
-Willkommen zum Teamprojekt!
-In diesem Github Repository wird ein großer Teil Eurer Arbeit stattfinden. Bitte stellt sicher, dass Ihr Anforderungen im Teamprojekt lest.
+## Introduction
+Welcome to our Pencil to Pixel project!
+We generate art in various styles, based on your sketch and promt!
+To be able to do this, we use Text-to-Image Diffusion Models based on Stable Diffusion-XL.
 
-GitHub Tour
-In Issues könnt Ihr entdeckte Fehler (Bugs), User Stories und andere Tickets festhalten, damit ihr nicht vergesst diese zu bearbeiten.
+Here are some examples of what it could look like:
+![](/examples/airplane_sketch.png)
+![](/examples/out_sketch_airplane8.png)
 
-Pull Requests sind spezielle Issues, die dazu verwendet werden, um Code Reviews durchzuführen.
 
-In Projects könnt Ihr Euch ein Sprint Board anlegen, um die nächste Iteration zu planen und Euren Fortschritt nachzuvollziehen. Eine Vorlage kann hier gefunden werden.
+## Setup
 
-Das Wiki kann genutzt werden, um zum Beispiel weitere inhaltliche Anforderungen zu erfassen, die Definition-of-Done zu dokumentieren oder Protokolle und Entscheidungen des Teams festzuhalten.
 
-Actions erlauben Euch Continuous Integration (CI) und automatisiertes Testen für jeden Pull Request und jedes Release einzurichten.
