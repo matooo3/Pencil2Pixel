@@ -54,14 +54,19 @@
     <div class="slider-container">
         <div class="detail-container">
             <p id="detaiText">Detail:</p>
-            <input type="range" min="0" max="100" value="50" class="slider" id="detailSlider">
+            <span class="slider-label">0%</span>
+            <input title="increase / decrease detail value" type="range" min="0" max="100" value="50" class="slider" id="detailSlider">
+            <span class="slider-label">100%</span>
             <p>Value: <span id="detailValue">50</span>%</p>
         </div>
         
         <div class="sp-container">
-            <p id="detaiText">Sketch vs. Prompt weigth:</p>
-            <input type="range" min="-10" max="10" value="0" class="slider" id="spSlider">
-            <p>Value: <span id="spValue">0</span></p>
+            <p id="detaiText">Sketch vs. Prompt weight:</p>
+            <span class="slider-label">Sketch</span>
+            <input title="change weight of Sketch / Prompt" type="range" min="0" max="10" value="5" class="slider" id="spSlider">
+            <span class="slider-label">Prompt</span>
+            <p>Sketch-Weight: <span id="sValue">5</span></p>
+            <p>Prompt-Weight: <span id="pValue">5</span></p>
         </div>
     </div>
     

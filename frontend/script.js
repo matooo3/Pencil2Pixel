@@ -226,7 +226,8 @@
         // Slidebars:
         // for python:
         let detailValue = 0;
-        let spValue = 0;
+        let sValue = 5;
+        let pValue = 5;
 
         // Details Slidebar:
         document.addEventListener('DOMContentLoaded', (event) => {
@@ -243,10 +244,13 @@
         // sketch-prompt weight Slidebar:
         document.addEventListener('DOMContentLoaded', (event) => {
             const slider = document.getElementById('spSlider');
-            const spValue = document.getElementById('spValue');
-        
+            const sValue = document.getElementById('sValue');
+            const pValue = document.getElementById('pValue');
+
             slider.addEventListener('input', () => {
-                spValue.textContent = slider.value;
-                spValue = slider.value;
+                pValue.textContent = slider.value;
+                sValue.textContent = 10 - slider.value;
+                pValue = slider.value;
+                sValue = 10 - slider.value;
             });
         });
