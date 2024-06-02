@@ -41,19 +41,37 @@
         <div id="dropdown">
             <button id="dropbtn">Select Style</button>
             <div id="dropdown-content">
-            <a id="nostyle" onclick="changeStyle(0)">No Style</a>
-            <a id="style1" onclick="changeStyle(1)">Style 1</a>
-            <a id="style2" onclick="changeStyle(2)">Style 2</a>
-            <a id="style3" onclick="changeStyle(3)">Style 3</a>
+                <a id="nostyle" onclick="changeStyle(0)">No Style</a>
+                <a id="style1" onclick="changeStyle(1)">Style 1</a>
+                <a id="style2" onclick="changeStyle(2)">Style 2</a>
+                <a id="style3" onclick="changeStyle(3)">Style 3</a>
+            </div>
         </div>
-          </div>
         <!-- !this was where the style selector is now! div id="logo"><p style="text-shadow: 2px 2px 5px black;">Pencil<span style="color: brown">2</span>Pixel</p></div-->
         <div id="submit" onclick="generate()">Generate Images</div>
+    </div>
+    
+    <div class="slider-container">
+        <div class="detail-container">
+            <p id="detaiText">Detail:</p>
+            <span class="slider-label">0%</span>
+            <input title="increase / decrease detail value" type="range" min="0" max="100" value="50" class="slider" id="detailSlider">
+            <span class="slider-label">100%</span>
+            <p>Value: <span id="detailValue">50</span>%</p>
         </div>
         
-        <div id="images" style="width: 400px; margin: auto; margin-top: 20px;"></div>
+        <div class="sp-container">
+            <p id="detaiText">Sketch vs. Prompt weight:</p>
+            <span class="slider-label">Sketch</span>
+            <input title="change weight of Sketch / Prompt" type="range" min="0" max="10" value="5" class="slider" id="spSlider">
+            <span class="slider-label">Prompt</span>
+            <p>Sketch-Weight: <span id="sValue">5</span></p>
+            <p>Prompt-Weight: <span id="pValue">5</span></p>
+        </div>
     </div>
-
+    
+    <div id="images" style="width: 400px; margin: auto; margin-top: 20px;"></div>
+    
     <script src="script.js" defer></script>
 </body>
 </html>

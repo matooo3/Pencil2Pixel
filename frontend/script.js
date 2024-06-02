@@ -221,3 +221,36 @@
             parent.appendChild(image);
             saveState();
         }
+
+
+        // Slidebars:
+        // for python:
+        let detailValue = 0;
+        let sValue = 5;
+        let pValue = 5;
+
+        // Details Slidebar:
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const slider = document.getElementById('detailSlider');
+            const detailValue = document.getElementById('detailValue');
+        
+            // Wird ausgeführt, wenn Wert des Sliders geändert wurde:
+            slider.addEventListener('input', () => {
+                detailValue.textContent = slider.value;
+                detail = slider.value;
+            });
+        });
+
+        // sketch-prompt weight Slidebar:
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const slider = document.getElementById('spSlider');
+            const sValue = document.getElementById('sValue');
+            const pValue = document.getElementById('pValue');
+
+            slider.addEventListener('input', () => {
+                pValue.textContent = slider.value;
+                sValue.textContent = 10 - slider.value;
+                pValue = slider.value;
+                sValue = 10 - slider.value;
+            });
+        });
