@@ -210,8 +210,11 @@
             alreadyClicked = false;
         });
         
+        let negPromptPY = "";
+        
         function generate() {
             document.body.style.overflow = "visible";
+            saveNegPrompt(); // save the negative prompt as string in negPromptPY
 
             const img = c.toDataURL('image/png');
             const image = document.createElement("img");
@@ -239,6 +242,10 @@
         let detailValuePY = 25;
         let sValuePY = 0.6;
         let pValuePY = 7.5;
+
+        function saveNegPrompt() {
+            negPromptPY = document.getElementById("negPrompt").value;
+        }
 
         // Details Slidebar:
         document.addEventListener('DOMContentLoaded', (event) => {
