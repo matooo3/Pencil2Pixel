@@ -281,8 +281,16 @@
             var dropdownContent = document.getElementById("advanced-dropdown-content");
             var dropdownArrow = document.getElementById("dropdown-arrow");
             if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-                dropdownArrow.textContent = "▼";
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                const checkScrollTop = () => {
+                    if (window.scrollY === 0) {
+                        dropdownContent.style.display = "none";
+                        dropdownArrow.textContent = "▼";
+                } else {
+                    setTimeout(checkScrollTop, 50);
+                }
+            };
+            checkScrollTop();
             } else {
                 dropdownContent.style.display = "block";
                 dropdownArrow.textContent = "▲";
