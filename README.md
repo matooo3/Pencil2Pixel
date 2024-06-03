@@ -21,5 +21,11 @@ Output:
 
 
 ## Setup
+To set up this project, you need to have Python (Add min. Version here?) installed.
+
+We recommend using a virtual environment like [Miniconda](https://docs.anaconda.com/free/miniconda/).
+
+Then you need to download all of the packages we use. To do this, just type:
+```pip install -r requirements.txt``` (We still need to create that file).
 
 
