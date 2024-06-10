@@ -210,7 +210,13 @@ document.getElementById("dropdown").addEventListener("mouseleave", function () {
     alreadyClicked = false;
 });
 
+
+let negPromptPY = "";
+
 function generate() {
+    document.body.style.overflow = "visible";
+    saveNegPrompt(); // save the negative prompt as string in negPromptPY
+  
     const img = c.toDataURL('image/png');
     const prompt = document.getElementById("prompt").value;
     const entry = {
@@ -286,3 +292,113 @@ document.addEventListener('DOMContentLoaded', (event) => {
         sValue = 10 - slider.value;
     });
 });
+
+function generateInitialImage() {
+    const img = c.toDataURL('image/png');
+    const image = document.createElement("img");
+    image.src = img;
+    image.style.borderRadius = '10px';
+    const parent = document.getElementById("images");
+    parent.innerHTML = "";
+    parent.appendChild(image);
+    saveState();
+}
+
+// Slidebars:
+// for python:
+let detailValuePY = 25;
+let sValuePY = 0.6;
+let pValuePY = 7.5;
+
+function saveNegPrompt() {
+    negPromptPY = document.getElementById("negPrompt").value;
+}
+
+// Details Slidebar:
+document.addEventListener('DOMContentLoaded', (event) => {
+    const detailSlider = document.getElementById('detailSlider');
+    const detailValue = document.getElementById('detailValue');
+
+    // Wird ausgeführt, wenn Wert des Sliders geändert wurde:
+    detailSlider.addEventListener('input', () => {
+        detailValue.textContent = detailSlider.value;
+        detailValuePY = detailSlider.value;
+    });
+
+    // sketch-prompt weight Slidebar:
+    const pSlider = document.getElementById('pSlider');
+    const pValue = document.getElementById('pValue');
+
+    pSlider.addEventListener('input', () => {
+        pValue.textContent = pSlider.value;
+        pValuePY = pSlider.value;
+    });
+
+    const sSlider = document.getElementById('sSlider');
+    const sValue = document.getElementById('sValue');
+    sSlider.addEventListener('input', () => {
+        sValue.textContent = sSlider.value;
+        sValuePY = sSlider.value;
+    });
+
+});
+
+
+function toggleAdvancedDropdown() {
+    var dropdownContent = document.getElementById("advanced-dropdown-content");
+    var dropdownArrow = document.getElementById("dropdown-arrow");
+    if (dropdownContent.style.display === "block") {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const checkScrollTop = () => {
+            if (window.scrollY === 0) {
+                dropdownContent.style.display = "none";
+                dropdownArrow.textContent = "▼";
+            } else {
+                setTimeout(checkScrollTop, 50);
+            }
+        };
+        checkScrollTop();
+    } else {
+        dropdownContent.style.display = "block";
+        dropdownArrow.textContent = "▲";
+        scrollToAdvancedOptions();
+
+    }
+}
+
+function scrollToAdvancedOptions() {
+    var advancedDropdown = document.getElementById("advanced-dropdown");
+    advancedDropdown.scrollIntoView({ behavior: "smooth" });
+}
+
+//SET VALUES TO DEFAULT:
+function setDefaults() {
+    const detailSlider = document.getElementById('detailSlider');
+    const pSlider = document.getElementById('pSlider');
+    const sSlider = document.getElementById('sSlider');
+
+    detailSlider.value = 25;
+    pSlider.value = 7.5;
+    sSlider.value = 0.6;
+
+    const detailValue = document.getElementById('detailValue');
+    const pValue = document.getElementById('pValue');
+    const sValue = document.getElementById('sValue');
+
+    // for PYTHON:
+    detailValue.textContent = detailSlider.value;
+    detailValuePY = detailSlider.value;
+
+    pValue.textContent = pSlider.value;
+    pValuePY = pSlider.value;
+
+    sValue.textContent = sSlider.value;
+    sValuePY = sSlider.value;
+}
+
+
+
+
+
+
+
