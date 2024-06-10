@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pencil2Pixel</title>
     <link rel="stylesheet" href="style.css">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
+<!-- <body onload="generateInitialImage()">             (LR-Problem) -->
 <body>
-
     <h1 id="headline">Pencil<span style="color: brown">2</span>Pixel</h1>
+    <div id="leftSide">
 
     <div id="tools">
         <div id="toolsleft">
@@ -51,27 +52,60 @@
         <div id="submit" onclick="generate()">Generate Images</div>
     </div>
     
-    <div class="slider-container">
-        <div class="detail-container">
-            <p id="detaiText">Detail:</p>
-            <span class="slider-label">0%</span>
-            <input title="increase / decrease detail value" type="range" min="0" max="100" value="50" class="slider" id="detailSlider">
-            <span class="slider-label">100%</span>
-            <p>Value: <span id="detailValue">50</span>%</p>
+    <div id="advanced-dropdown">
+        <div id="advanced-dropbtn-container">
+            <button id="advanced-dropbtn" onclick="toggleAdvancedDropdown()">Advanced Options<span id="dropdown-arrow">▼</span></button>
         </div>
-        
-        <div class="sp-container">
-            <p id="detaiText">Sketch vs. Prompt weight:</p>
-            <span class="slider-label">Sketch</span>
-            <input title="change weight of Sketch / Prompt" type="range" min="0" max="10" value="5" class="slider" id="spSlider">
-            <span class="slider-label">Prompt</span>
-            <p>Sketch-Weight: <span id="sValue">5</span></p>
-            <p>Prompt-Weight: <span id="pValue">5</span></p>
+        <div id="advanced-dropdown-content">
+
+            <div class="negPrompt-container">
+                <p id="detaiText">Negative Prompt:</p>
+                <textarea id="negPrompt" placeholder="Enter negative prompt here..."></textarea>
+            </div>
+
+            <div class="slider-container">
+                <div class="detail-container">
+                    <p id="detaiText">Number of steps: <span id="detailValue">25</span></p>
+                    <span class="slider-label">0</span>
+                    <input title="increase / decrease detail value" type="range" min="0" max="50" value="25" step="1" class="slider" id="detailSlider">
+                    <span class="slider-label">50</span>
+                </div>
+                
+                <div class="p-container">
+                    <p id="detaiText">Guidance scale: <span id="pValue">7.5</span></p>
+                    <span class="slider-label">0</span>
+                    <input title="Prompt" type="range" min="0" max="15" value="7.5" step="0.5" class="slider" id="pSlider">
+                    <span class="slider-label">15</span>
+                </div>
+
+                <div class="s-container">
+                    <p id="detaiText">Adapter conditioning scale: <span id="sValue">0.6</span></p>
+                    <span class="slider-label">0</span>
+                    <input title="Sketch" type="range" min="0" max="1" value="0.6" step="0.1" class="slider" id="sSlider">
+                    <span class="slider-label">1</span>
+                </div>
+
+            </div>
+
+            <div id="defaultValues-container">
+                <p>Reset to default values: <button onclick="setDefaults()" id="defaultBtn">↻</button></p>
+            </div>
+
         </div>
     </div>
+
+    </div> <!-- end of leftSide -->
     
-    <div id="images" style="width: 400px; margin: auto; margin-top: 20px;"></div>
-    
+    <!-- <div id="middleSide">         (LR-Problem)
+        <p>
+            ➔
+        </p>
+    </div> -->
+
+    <div id="rightSide">
+        <div id="images" style="width: 400px; margin: auto; margin-top: 20px;"></div>
+    </div> <!-- end of rightSide -->
+
     <script src="script.js" defer></script>
 </body>
 </html>
