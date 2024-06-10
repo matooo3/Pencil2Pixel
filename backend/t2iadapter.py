@@ -1,8 +1,6 @@
 from diffusers import StableDiffusionXLAdapterPipeline, T2IAdapter, EulerAncestralDiscreteScheduler, AutoencoderKL
 from diffusers.utils import load_image, make_image_grid
-from controlnet_aux.pidi import PidiNetDetector
 import torch
-import argparse
 
 
 #links to the huggingface website on which the sdxl files are located
@@ -21,18 +19,8 @@ animeName = "pastel-anime-xl-latest.safetensors"
 watercolorName = "watercolor_v1_sdxl.safetensors"
 crayonsName = "crayons_v1_sdxl.safetensors"
 
-def get_args():
-    parser = argparse.ArgumentParser()
+def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale):
 
-    parser.add_argument('--num_of_images', type=int, default=1, help='')
-    parser.add_argument('--num_inference_steps', type=int, default=30, help='')
-    parser.add_argument("--adapter_conditioning_scale", type=float, default=0.6, help='')
-    parser.add_argument("--guidance_scale", type=float, default=7.5, help='')
-    parser.add_argument("--style", type=str, default=None, help='')        
-
-    args = parser.parse_args()
-    styles = args.style
-    print(styles)
     match styles:
         case "Watercolor":
              modelID = watercolorID
@@ -50,11 +38,8 @@ def get_args():
             modelID = origamiID
             modelName = origamiName
         case "Anime":
-            modelID = animeID
-            modelName = animeName  
-    return args
-
-def run(args):
+            modelID = photographyID
+            modelName = photographyName  
 
     # load adapter
     adapter = T2IAdapter.from_pretrained(
@@ -73,46 +58,29 @@ def run(args):
     ).to("cuda")
     pipe.enable_xformers_memory_efficient_attention()
 
-    #loads image that will be used as the sketch
-    image = load_image("test_pics/house.png")
-    #amount of images that will be generated
-    amountOfImages = args.num_of_images 
-    if amountOfImages > 4:
-      amountOfImages = 4
-    if amountOfImages < 0:
-      amountOfImages = 1
-
     #loads the chosen style by the user
     pipe.load_lora_weights(modelID, weight_name=modelName)
-    prompt = "house on lake, Mount Fuji in the background, sunset, realistic, 4k"
-    negative_prompt = "extra digit, fewer digits, cropped, worst quality, low quality, glitch, deformed, mutated, ugly, disfigured"
+    
+    if image.mode != "RGB":
+         image = image.convert("RGB")
 
-    while amountOfImages > 0:
-      amountOfImages -= 1
-      gen_images = pipe(
-         prompt=prompt,
-         negative_prompt=negative_prompt,
-         image=image,
-         num_inference_steps=args.num_inference_steps,
-         adapter_conditioning_scale=args.adapter_conditioning_scale,
-         guidance_scale=args.guidance_scale,
-         ).images[0]
-      gen_images.save('test_pics/generate_more_images_test' + str(amountOfImages) + '.png')
+    try:
+        num_inference_steps = int(num_inference_steps)
+        adapter_conditioning_scale = float(adapter_conditioning_scale)
+        guidance_scale = float(guidance_scale)
 
+        # Generate images
+        gen_images = pipe(
+            prompt=prompt,
+            negative_prompt=negative_prompt,
+            image=image,
+            num_inference_steps=num_inference_steps,
+            adapter_conditioning_scale=adapter_conditioning_scale,
+            guidance_scale=guidance_scale,
+        ).images[0]
 
-    gen_images = pipe(
-        prompt=prompt,
-        negative_prompt=negative_prompt,
-        image=image,
-        num_inference_steps=args.num_inference_steps,
-        adapter_conditioning_scale=args.adapter_conditioning_scale,
-        guidance_scale=args.guidance_scale,
-    ).images[0]
-    gen_images.save('test_pics/house_anime_test.png')
-
-def main():
-    args = get_args()
-    run(args)
-
-if __name__ == '__main__':
-    main()
+        print("Generated image successfully")
+        gen_images.save('generate_more_images_test1.png')
+        print("Image saved successfully")
+    except Exception as e:
+        print(f"An error occurred during image generation: {e}")
