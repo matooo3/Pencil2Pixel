@@ -39,4 +39,4 @@ def generate():
     return res
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0' port=6873)
+    app.run(debug=True, host='0.0.0.0', port=6873)

@@ -38,8 +38,8 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
             modelID = origamiID
             modelName = origamiName
         case "Anime":
-            modelID = animeID
-            modelName = animeName  
+            modelID = photographyID
+            modelName = photographyName  
 
     # load adapter
     adapter = T2IAdapter.from_pretrained(
@@ -57,25 +57,30 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
         model_id, vae=vae, adapter=adapter, scheduler=euler_a, torch_dtype=torch.float16, variant="fp16",
     ).to("cuda")
     pipe.enable_xformers_memory_efficient_attention()
-    
-    #amount of images that will be generated
-    
-    if amountOfImages > 4:
-      amountOfImages = 4
-    if amountOfImages < 0:
-      amountOfImages = 1
 
     #loads the chosen style by the user
     pipe.load_lora_weights(modelID, weight_name=modelName)
     
-    while amountOfImages > 0:
-      amountOfImages -= 1
-      gen_images = pipe(
-         prompt=prompt,
-         negative_prompt=negative_prompt,
-         image=image,
-         num_inference_steps = num_inference_steps,
-         adapter_conditioning_scale=adapter_conditioning_scale,
-         guidance_scale=guidance_scale,
-         ).images[0]
-      gen_images.save('test_pics/generate_more_images_test' + str(amountOfImages) + '.png')
+    if image.mode != "RGB":
+         image = image.convert("RGB")
+
+    try:
+        num_inference_steps = int(num_inference_steps)
+        adapter_conditioning_scale = float(adapter_conditioning_scale)
+        guidance_scale = float(guidance_scale)
+
+        # Generate images
+        gen_images = pipe(
+            prompt=prompt,
+            negative_prompt=negative_prompt,
+            image=image,
+            num_inference_steps=num_inference_steps,
+            adapter_conditioning_scale=adapter_conditioning_scale,
+            guidance_scale=guidance_scale,
+        ).images[0]
+
+        print("Generated image successfully")
+        gen_images.save('generate_more_images_test1.png')
+        print("Image saved successfully")
+    except Exception as e:
+        print(f"An error occurred during image generation: {e}")
