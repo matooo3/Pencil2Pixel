@@ -5,16 +5,16 @@ body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     /* overflow: hidden; */
     user-select: none;
-    display: flex;
+    /* display: flex;            (LR-Problem) */
 }
 
 #headline {
-    position: absolute;
+    /* position: absolute;       (LR-Problem)
     top: 0;
     left: 50%;
     transform: translate(-50%, 0);
     width: 100%;
-    text-align: center;
+    text-align: center; */
     color: rgb(220, 220, 220);
     font-style: italic;
     font-size: 65px;
@@ -328,7 +328,8 @@ body {
 #advanced-dropdown {
     position: relative;
     display: inline-block;
-    width: 80%;
+    /* width: 80%;                  (LR-Problem) */
+    width: 400px;
     text-align: center;
     border: solid rgba(0, 0, 0, 0.628) 1px;
     background-color: rgba(150, 150, 170, 0.541);
@@ -378,23 +379,23 @@ body {
 
 /*Split into LEFT and RIGHT side not below and*/
 #leftSide {
-    position: absolute;
+    /* position: absolute;      (LR-Problem)
     top: 23%;
-    left: 15%;
+    left: 15%; */
 }
 
 #middleSide {
-    position: absolute;
+    /* position: absolute;      (LR-Problem)
     color: white;
     left: 51%;
     top: 45%;
-    scale: 7;
+    scale: 7; */
 }
 
 #rightSide {
-    position: absolute;
+    /* position: absolute;      (LR-Problem)
     top: 25%;
-    right: 15%;
+    right: 15%; */
 }
 
 
