@@ -3,6 +3,7 @@ from PIL import Image
 from flask_cors import CORS
 import io
 import base64
+from t2iadapter import run
 
 app = Flask(__name__)
 CORS(app, resources={r"/generate": {"origins": "*"}})
@@ -14,15 +15,19 @@ def generate():
 
     # Extracting the base64 string from the data URL
     img_base64 = data["image"].split(",")[1]
-    prompt = data["prompt"]
-
     img_data = base64.b64decode(img_base64)
+
     image = Image.open(io.BytesIO(img_data))
-    
-    # vv INSERT AI IMAGE GENERATION HERE vv #
-    #                                       #
-    #                                       #
-    # ^^ INSERT AI IMAGE GENERATION HERE ^^ #
+    prompt = data["prompt"]
+    style = data["style"]
+    amountOfImages = data["amountOfImages"]
+    num_inference_steps = data["num_inference_steps"]
+    negative_prompt = data["negative_prompt"]
+    adapter_conditioning_scale = data["adapter_conditioning_scale"]
+    guidance_scale = data["guidance_scale"]
+
+    #running t2i script
+    run(image, prompt, style, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale)
 
     # Convert the processed image to base64
     buffered = io.BytesIO()

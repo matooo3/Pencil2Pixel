@@ -6,6 +6,13 @@ const eraseOffset = 5;
 var brush = true;
 var lineRadius = 5;
 var pos = { x: 0, y: 0 };
+let negPromptPY = "extra digit, fewer digits, cropped, worst quality, low quality, glitch, deformed, mutated, ugly, disfigured";
+
+// Slidebars:
+// for python:
+let detailValuePY = 25;
+let sValuePY = 0.6;
+let pValuePY = 7.5;
 
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, c.width, c.height);
@@ -210,18 +217,27 @@ document.getElementById("dropdown").addEventListener("mouseleave", function () {
     alreadyClicked = false;
 });
 
-
-let negPromptPY = "";
-
 function generate() {
     document.body.style.overflow = "visible";
     saveNegPrompt(); // save the negative prompt as string in negPromptPY
   
     const img = c.toDataURL('image/png');
     const prompt = document.getElementById("prompt").value;
+    const style = document.getElementById("dropbtn").innerHTML;
+    const amountOfImages = 1; //TODO
+    const num_inference_steps = detailValuePY;
+    const negative_prompt = negPromptPY;
+    const adapter_conditioning_scale = sValuePY;
+    const guidance_scale = pValuePY;
     const entry = {
         image: img,
-        prompt: prompt
+        prompt: prompt,
+        style: style,
+        amountOfImages: amountOfImages,
+        num_inference_steps: num_inference_steps,
+        negative_prompt: negative_prompt,
+        adapter_conditioning_scale: adapter_conditioning_scale,
+        guidance_scale: guidance_scale
     };
     const url = `${window.location.protocol}//${window.location.hostname}:6873/generate`;
 
@@ -260,39 +276,6 @@ function generate() {
     });
 }
 
-
-// Slidebars:
-// for python:
-let detailValue = 0;
-let sValue = 5;
-let pValue = 5;
-
-// Details Slidebar:
-document.addEventListener('DOMContentLoaded', (event) => {
-    const slider = document.getElementById('detailSlider');
-    const detailValue = document.getElementById('detailValue');
-
-    // Wird ausgeführt, wenn Wert des Sliders geändert wurde:
-    slider.addEventListener('input', () => {
-        detailValue.textContent = slider.value;
-        detail = slider.value;
-    });
-});
-
-// sketch-prompt weight Slidebar:
-document.addEventListener('DOMContentLoaded', (event) => {
-    const slider = document.getElementById('spSlider');
-    const sValue = document.getElementById('sValue');
-    const pValue = document.getElementById('pValue');
-
-    slider.addEventListener('input', () => {
-        pValue.textContent = slider.value;
-        sValue.textContent = 10 - slider.value;
-        pValue = slider.value;
-        sValue = 10 - slider.value;
-    });
-});
-
 function generateInitialImage() {
     const img = c.toDataURL('image/png');
     const image = document.createElement("img");
@@ -303,12 +286,6 @@ function generateInitialImage() {
     parent.appendChild(image);
     saveState();
 }
-
-// Slidebars:
-// for python:
-let detailValuePY = 25;
-let sValuePY = 0.6;
-let pValuePY = 7.5;
 
 function saveNegPrompt() {
     negPromptPY = document.getElementById("negPrompt").value;
