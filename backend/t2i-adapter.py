@@ -24,6 +24,7 @@ crayonsName = "crayons_v1_sdxl.safetensors"
 def get_args():
     parser = argparse.ArgumentParser()
 
+    parser.add_argument('--num_of_images', type=int, default=1, help='')
     parser.add_argument('--num_inference_steps', type=int, default=30, help='')
     parser.add_argument("--adapter_conditioning_scale", type=float, default=0.6, help='')
     parser.add_argument("--guidance_scale", type=float, default=7.5, help='')
@@ -74,11 +75,30 @@ def run(args):
 
     #loads image that will be used as the sketch
     image = load_image("test_pics/house.png")
+    #amount of images that will be generated
+    amountOfImages = args.num_of_images 
+    if amountOfImages > 4:
+      amountOfImages = 4
+    if amountOfImages < 0:
+      amountOfImages = 1
 
     #loads the chosen style by the user
     pipe.load_lora_weights(modelID, weight_name=modelName)
     prompt = "house on lake, Mount Fuji in the background, sunset, realistic, 4k"
     negative_prompt = "extra digit, fewer digits, cropped, worst quality, low quality, glitch, deformed, mutated, ugly, disfigured"
+
+    while amountOfImages > 0:
+      amountOfImages -= 1
+      gen_images = pipe(
+         prompt=prompt,
+         negative_prompt=negative_prompt,
+         image=image,
+         num_inference_steps=args.num_inference_steps,
+         adapter_conditioning_scale=args.adapter_conditioning_scale,
+         guidance_scale=args.guidance_scale,
+         ).images[0]
+      gen_images.save('test_pics/generate_more_images_test' + str(amountOfImages) + '.png')
+
 
     gen_images = pipe(
         prompt=prompt,
