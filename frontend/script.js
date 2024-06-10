@@ -210,21 +210,88 @@ document.getElementById("dropdown").addEventListener("mouseleave", function () {
     alreadyClicked = false;
 });
 
+
 let negPromptPY = "";
 
 function generate() {
     document.body.style.overflow = "visible";
     saveNegPrompt(); // save the negative prompt as string in negPromptPY
-
+  
     const img = c.toDataURL('image/png');
-    const image = document.createElement("img");
-    image.src = img;
-    image.style.borderRadius = '10px';
-    const parent = document.getElementById("images");
-    parent.innerHTML = "";
-    parent.appendChild(image);
-    saveState();
+    const prompt = document.getElementById("prompt").value;
+    const entry = {
+        image: img,
+        prompt: prompt
+    };
+    const url = `${window.location.protocol}//${window.location.hostname}:6873/generate`;
+
+    console.log("Requesting images from server...");
+
+    var XHR = $.ajax({
+        type: "POST",
+        url: url,
+        data: JSON.stringify(entry),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    });
+
+    XHR.done(function(data) {
+
+        // Create image element
+        const image = document.createElement("img");
+        // Set source of the image to the received base64 encoded image data
+        image.src = "data:image/png;base64," + data.image;
+        
+        // Append the image to the DOM
+        const parent = document.getElementById("images");
+        parent.innerHTML = "";
+        parent.appendChild(image);
+
+        console.log("AJAX request successful.");
+        saveState();
+    });
+
+    XHR.fail(function(XHR, textStatus, errorThrown) {
+        console.error("Error:", textStatus, errorThrown);
+    });
+
+    XHR.always(function() {
+        console.log("AJAX request finished.");
+    });
 }
+
+
+// Slidebars:
+// for python:
+let detailValue = 0;
+let sValue = 5;
+let pValue = 5;
+
+// Details Slidebar:
+document.addEventListener('DOMContentLoaded', (event) => {
+    const slider = document.getElementById('detailSlider');
+    const detailValue = document.getElementById('detailValue');
+
+    // Wird ausgeführt, wenn Wert des Sliders geändert wurde:
+    slider.addEventListener('input', () => {
+        detailValue.textContent = slider.value;
+        detail = slider.value;
+    });
+});
+
+// sketch-prompt weight Slidebar:
+document.addEventListener('DOMContentLoaded', (event) => {
+    const slider = document.getElementById('spSlider');
+    const sValue = document.getElementById('sValue');
+    const pValue = document.getElementById('pValue');
+
+    slider.addEventListener('input', () => {
+        pValue.textContent = slider.value;
+        sValue.textContent = 10 - slider.value;
+        pValue = slider.value;
+        sValue = 10 - slider.value;
+    });
+});
 
 function generateInitialImage() {
     const img = c.toDataURL('image/png');
@@ -328,6 +395,9 @@ function setDefaults() {
     sValue.textContent = sSlider.value;
     sValuePY = sSlider.value;
 }
+
+
+
 
 
 
