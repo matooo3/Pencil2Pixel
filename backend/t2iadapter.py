@@ -21,6 +21,7 @@ crayonsName = "crayons_v1_sdxl.safetensors"
 
 def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale):
 
+    # change the chosen style
     match styles:
         case "Watercolor":
              modelID = watercolorID
@@ -40,14 +41,12 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
         case "Anime":
             modelID = photographyID
             modelName = photographyName  
+        case _:
+            modelID = "No Style"
 
     # load adapter
     adapter = T2IAdapter.from_pretrained(
       "TencentARC/t2i-adapter-sketch-sdxl-1.0", torch_dtype=torch.float16, varient="fp16").to("cuda")
-
-    #Change modelID and modelName to get a different style
-    modelID = watercolorID
-    modelName = watercolorName
 
     # load euler_a scheduler
     model_id = 'stabilityai/stable-diffusion-xl-base-1.0'
@@ -59,8 +58,10 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
     pipe.enable_xformers_memory_efficient_attention()
 
     #loads the chosen style by the user
-    pipe.load_lora_weights(modelID, weight_name=modelName)
+    if(modelID != "No Style"):
+        pipe.load_lora_weights(modelID, weight_name=modelName)
     
+    # converts image to RGB
     if image.mode != "RGB":
          image = image.convert("RGB")
 
