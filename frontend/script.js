@@ -154,6 +154,15 @@ function changeStyle(n) {
         case 3:
             style = document.getElementById("style3").innerHTML;
             break;
+        case 4:
+            style = document.getElementById("style4").innerHTML;
+            break;
+        case 5:
+            style = document.getElementById("style5").innerHTML;
+            break;
+        case 6:
+            style = document.getElementById("style6").innerHTML;
+            break;
         default:
             break;
     }
