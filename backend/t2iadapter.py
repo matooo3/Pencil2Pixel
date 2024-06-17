@@ -1,3 +1,4 @@
+GenerateMultipleImages
 from diffusers import StableDiffusionXLAdapterPipeline, T2IAdapter, EulerAncestralDiscreteScheduler, AutoencoderKL
 from diffusers.utils import load_image, make_image_grid
 import torch
@@ -90,4 +91,3 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
 
         return imageArray
     except Exception as e:
-        print(f"An error occurred during image generation: {e}")
