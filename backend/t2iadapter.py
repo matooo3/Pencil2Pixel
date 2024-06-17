@@ -83,6 +83,6 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
         #gen_images.save('generate_more_images_test1.png')
         #print("Image saved successfully")
 
-        return gen_images
+        return [gen_images]
     except Exception as e:
         print(f"An error occurred during image generation: {e}")
