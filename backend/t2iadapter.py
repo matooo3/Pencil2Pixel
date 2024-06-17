@@ -1,4 +1,4 @@
-from diffusers import StableDiffusionXLAdapterPipeline, T2IAdapter, EulerAncestralDiscreteScheduler, AutoencoderKL
+from diffusers import StableDiffusionXLAdapterPipeline, StableDiffusionAdapterPipeline, T2IAdapter, EulerAncestralDiscreteScheduler, AutoencoderKL
 from diffusers.utils import load_image, make_image_grid
 import torch
 
@@ -42,8 +42,10 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
             modelName = photographyName  
 
     # load adapter
-    adapter = T2IAdapter.from_pretrained(
-      "TencentARC/t2i-adapter-sketch-sdxl-1.0", torch_dtype=torch.float16, varient="fp16").to("cuda")
+    # adapter = T2IAdapter.from_pretrained(
+    #   "TencentARC/t2i-adapter-sketch-sdxl-1.0", torch_dtype=torch.float16, varient="fp16").to("cuda")
+
+    adapter = T2IAdapter.from_pretrained("TencentARC/t2iadapter_sketch_sd15v2", torch_dtype=torch.float16).to("cuda")
 
     #Change modelID and modelName to get a different style
     modelID = photographyID
@@ -51,11 +53,15 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
     
     imageArray = []
     # load euler_a scheduler
-    model_id = 'stabilityai/stable-diffusion-xl-base-1.0'
-    euler_a = EulerAncestralDiscreteScheduler.from_pretrained(model_id, subfolder="scheduler")
-    vae=AutoencoderKL.from_pretrained("madebyollin/sdxl-vae-fp16-fix", torch_dtype=torch.float16)
-    pipe = StableDiffusionXLAdapterPipeline.from_pretrained(
-        model_id, vae=vae, adapter=adapter, scheduler=euler_a, torch_dtype=torch.float16, variant="fp16",
+    # model_id = 'stabilityai/stable-diffusion-xl-base-1.0'
+    model_id = "runwayml/stable-diffusion-v1-5"
+    # euler_a = EulerAncestralDiscreteScheduler.from_pretrained(model_id, subfolder="scheduler")
+    # vae=AutoencoderKL.from_pretrained("madebyollin/sdxl-vae-fp16-fix", torch_dtype=torch.float16)
+    # pipe = StableDiffusionXLAdapterPipeline.from_pretrained(
+    #     model_id, vae=vae, adapter=adapter, scheduler=euler_a, torch_dtype=torch.float16, variant="fp16",
+    # ).to("cuda")
+    pipe = StableDiffusionAdapterPipeline.from_pretrained(
+    model_id, adapter=adapter, safety_checker=None, torch_dtype=torch.float16, variant="fp16"
     ).to("cuda")
     pipe.enable_xformers_memory_efficient_attention()
 	
