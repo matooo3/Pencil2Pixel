@@ -261,7 +261,7 @@ function generate() {
         // Create image element
         const image = document.createElement("img");
         // Set source of the image to the received base64 encoded image data
-        image.src = "data:image/png;base64," + data.image;
+        image.src = "data:image/png;base64," + data.images;
         parent.appendChild(image);
         }
 
