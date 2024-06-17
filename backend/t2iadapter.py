@@ -91,3 +91,4 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
 
         return imageArray
     except Exception as e:
+        print(f"An error occurred during image generation: {e}")
