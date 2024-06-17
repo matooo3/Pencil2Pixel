@@ -26,8 +26,8 @@ def generate():
     adapter_conditioning_scale = data["adapter_conditioning_scale"]
     guidance_scale = data["guidance_scale"]
 
-    #running t2i script
-    run(image, prompt, style, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale)
+    #running function from the t2i script
+    image = run(image, prompt, style, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale)
 
     # Convert the processed image to base64
     buffered = io.BytesIO()
