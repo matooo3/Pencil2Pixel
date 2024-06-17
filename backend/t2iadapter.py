@@ -48,7 +48,8 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
     #Change modelID and modelName to get a different style
     modelID = photographyID
     modelName = photographyName
-
+    
+    imageArray = []
     # load euler_a scheduler
     model_id = 'stabilityai/stable-diffusion-xl-base-1.0'
     euler_a = EulerAncestralDiscreteScheduler.from_pretrained(model_id, subfolder="scheduler")
@@ -57,7 +58,7 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
         model_id, vae=vae, adapter=adapter, scheduler=euler_a, torch_dtype=torch.float16, variant="fp16",
     ).to("cuda")
     pipe.enable_xformers_memory_efficient_attention()
-
+	
     #loads the chosen style by the user
     pipe.load_lora_weights(modelID, weight_name=modelName)
     
@@ -82,11 +83,11 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
             ).images[0]
 
             print("Generated image successfully")
-        
+            imageArray[i] = gen_images
             gen_images.save('test_17_05' + str(i) + '.png')
             i -= 1
             print("Image saved successfully")
 
-        return gen_images
+        return imageArray
     except Exception as e:
         print(f"An error occurred during image generation: {e}")
