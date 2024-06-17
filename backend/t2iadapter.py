@@ -89,7 +89,7 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
             ).images[0]
 
             print("Generated image successfully")
-            imageArray[i] = gen_images
+            imageArray.append(gen_images)
             gen_images.save('test_17_05' + str(i) + '.png')
             i -= 1
             print("Image saved successfully")
