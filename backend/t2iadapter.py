@@ -1,4 +1,3 @@
-GenerateMultipleImages
 from diffusers import StableDiffusionXLAdapterPipeline, T2IAdapter, EulerAncestralDiscreteScheduler, AutoencoderKL
 from diffusers.utils import load_image, make_image_grid
 import torch
