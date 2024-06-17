@@ -46,8 +46,10 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
       "TencentARC/t2i-adapter-sketch-sdxl-1.0", torch_dtype=torch.float16, varient="fp16").to("cuda")
 
     #Change modelID and modelName to get a different style
-    modelID = watercolorID
-    modelName = watercolorName
+    modelID = photographyID
+    modelName = photographyName
+
+    imageArray = []
 
     # load euler_a scheduler
     model_id = 'stabilityai/stable-diffusion-xl-base-1.0'
@@ -65,24 +67,30 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
          image = image.convert("RGB")
 
     try:
+        i = int(amountOfImages)
         num_inference_steps = int(num_inference_steps)
         adapter_conditioning_scale = float(adapter_conditioning_scale)
         guidance_scale = float(guidance_scale)
 
-        # Generate images
-        gen_images = pipe(
-            prompt=prompt,
-            negative_prompt=negative_prompt,
-            image=image,
-            num_inference_steps=num_inference_steps,
-            adapter_conditioning_scale=adapter_conditioning_scale,
-            guidance_scale=guidance_scale,
-        ).images[0]
+        while i > 0:
+             # Generate images
+            gen_images = pipe(
+                prompt=prompt,
+                negative_prompt=negative_prompt,
+                image=image,
+                num_inference_steps=num_inference_steps,
+                adapter_conditioning_scale=adapter_conditioning_scale,
+                guidance_scale=guidance_scale,
+            ).images[0]
+            
+            imageArray.append(gen_images)
 
-        print("Generated image successfully")
-        #gen_images.save('generate_more_images_test1.png')
-        #print("Image saved successfully")
+            print("Generated image successfully")
+        
+            gen_images.save('test_17_05' + str(i) + '.png')
+            i -= 1
+            print("Image saved successfully")
 
-        return [gen_images]
+        return imageArray
     except Exception as e:
         print(f"An error occurred during image generation: {e}")

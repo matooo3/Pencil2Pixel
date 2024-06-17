@@ -27,8 +27,7 @@ def generate():
     guidance_scale = data["guidance_scale"]
 
     #running function from the t2i script
-    images = run(image, prompt, style, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale)
-    
+    images = run(image.resize((1111, 1111)), prompt, style, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale)
     imgs = []
 
     for img in images:
