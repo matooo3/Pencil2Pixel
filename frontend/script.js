@@ -225,7 +225,7 @@ function generate() {
     const img = c.toDataURL('image/png');
     const prompt = document.getElementById("prompt").value;
     const style = document.getElementById("dropbtn").innerHTML;
-    const amountOfImages = 1; //TODO
+    const amountOfImages = MIValuePY; //TODO
     const num_inference_steps = detailValuePY;
     const negative_prompt = negPromptPY;
     const adapter_conditioning_scale = sValuePY;
@@ -258,13 +258,13 @@ function generate() {
         // Append the image to the DOM
         const parent = document.getElementById("images");
         parent.innerHTML = "";
-        for(var i = 0; i < images.length; i++) {
+        images.forEach((object) => {
         // Create image element
         const image = document.createElement("img");
         // Set source of the image to the received base64 encoded image data
-        image.src = "data:image/png;base64," + data.images;
+        image.src = "data:image/png;base64," + object;
         parent.appendChild(image);
-        }
+        });
 
         console.log("AJAX request successful.");
         saveState();
