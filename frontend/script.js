@@ -253,16 +253,18 @@ function generate() {
     });
 
     XHR.done(function(data) {
-
-        // Create image element
-        const image = document.createElement("img");
-        // Set source of the image to the received base64 encoded image data
-        image.src = "data:image/png;base64," + data.image;
+        const images = data.images;
         
         // Append the image to the DOM
         const parent = document.getElementById("images");
         parent.innerHTML = "";
+        for(var i = 0; i < images.length; i++) {
+        // Create image element
+        const image = document.createElement("img");
+        // Set source of the image to the received base64 encoded image data
+        image.src = "data:image/png;base64," + data.images;
         parent.appendChild(image);
+        }
 
         console.log("AJAX request successful.");
         saveState();
