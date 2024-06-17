@@ -146,22 +146,22 @@ function changeStyle(n) {
 
     switch (n) {
         case 1:
-            style = document.getElementById("style1").innerHTML;
+            style = document.getElementById("photography").innerHTML;
             break;
         case 2:
-            style = document.getElementById("style2").innerHTML;
+            style = document.getElementById("embroidery").innerHTML;
             break;
         case 3:
-            style = document.getElementById("style3").innerHTML;
+            style = document.getElementById("origami").innerHTML;
             break;
         case 4:
-            style = document.getElementById("style4").innerHTML;
+            style = document.getElementById("anime").innerHTML;
             break;
         case 5:
-            style = document.getElementById("style5").innerHTML;
+            style = document.getElementById("watercolor").innerHTML;
             break;
         case 6:
-            style = document.getElementById("style6").innerHTML;
+            style = document.getElementById("crayon").innerHTML;
             break;
         default:
             break;
