@@ -13,6 +13,7 @@ let negPromptPY = "extra digit, fewer digits, cropped, worst quality, low qualit
 let detailValuePY = 25;
 let sValuePY = 0.6;
 let pValuePY = 7.5;
+let MIValuePY = 1; // multiple images value
 
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, c.width, c.height);
@@ -318,6 +319,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
         sValuePY = sSlider.value;
     });
 
+    // Multiple img Slider:
+    const MISlider = document.getElementById('MISlider');
+    const MIValue = document.getElementById('MIValue');
+    MISlider.addEventListener('input', () => {
+        MIValue.textContent = MISlider.value;
+        MIValuePY = MISlider.value;
+    })
+
 });
 
 
@@ -353,15 +362,18 @@ function setDefaults() {
     const detailSlider = document.getElementById('detailSlider');
     const pSlider = document.getElementById('pSlider');
     const sSlider = document.getElementById('sSlider');
-
+    const MISlider = document.getElementById('MISlider');
+    
     detailSlider.value = 25;
     pSlider.value = 7.5;
     sSlider.value = 0.6;
-
+    MISlider.value = 1;
+    
     const detailValue = document.getElementById('detailValue');
     const pValue = document.getElementById('pValue');
     const sValue = document.getElementById('sValue');
-
+    const MIValue = document.getElementById('MIValue');
+    
     // for PYTHON:
     detailValue.textContent = detailSlider.value;
     detailValuePY = detailSlider.value;
@@ -371,6 +383,9 @@ function setDefaults() {
 
     sValue.textContent = sSlider.value;
     sValuePY = sSlider.value;
+
+    MIValue.textContent = MISlider.value;
+    MIValuePY = MISlider.value;
 }
 
 
