@@ -27,15 +27,19 @@ def generate():
     guidance_scale = data["guidance_scale"]
 
     #running function from the t2i script
-    image = run(image, prompt, style, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale)
+    images = run(image, prompt, style, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale)
+    
+    imgs = []
 
-    # Convert the processed image to base64
-    buffered = io.BytesIO()
-    image.save(buffered, format="PNG")
-    img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+    for img in images:
+        # Convert the processed images to base64
+        buffered = io.BytesIO()
+        img.save(buffered, format="PNG")
+        imgs.append(base64.b64encode(buffered.getvalue()).decode("utf-8"))
+
 
     # Return the base64 encoded image data as JSON
-    res = make_response(jsonify({"image": img_str}), 200)
+    res = make_response(jsonify({"images": imgs}), 200)
     return res
 
 if __name__ == "__main__":
