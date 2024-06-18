@@ -20,6 +20,7 @@ ctx.fillRect(0, 0, c.width, c.height);
 
 document.addEventListener('mousemove', draw);
 document.addEventListener('mousedown', setPosition);
+document.addEventListener('mousedown', drawDot);
 document.addEventListener('mouseenter', setPosition);
 c.addEventListener('mouseup', function () {
     states = states.slice(0, currentStateIndex + 1);
@@ -27,8 +28,21 @@ c.addEventListener('mouseup', function () {
 });
 
 function setPosition(e) {
-    pos.x = e.clientX - c.getBoundingClientRect().left;
-    pos.y = e.clientY - c.getBoundingClientRect().top;
+    pos.x = e.clientX - offsetX;
+    pos.y = e.clientY - offsetY;
+}
+
+function drawDot(e) {
+    if(e.clientX > offsetX && e.clientX < offsetX + 400 && e.clientY > offsetY && e.clientY < offsetY + 400) {
+        ctx.beginPath();
+        if(brush) {
+            ctx.fillStyle = "black";
+        } else {
+            ctx.fillStyle = "white";
+        }
+        ctx.arc(pos.x, pos.y, lineRadius/2, 0, 2 * Math.PI, false);
+        ctx.fill();
+    }
 }
 
 
@@ -97,7 +111,6 @@ function draw(e) {
         ctx.strokeStyle = "white";
         ctx.lineWidth = lineRadius + eraseOffset;
     }
-
     ctx.moveTo(pos.x, pos.y); // from
     setPosition(e);
     ctx.lineTo(pos.x, pos.y); // to
