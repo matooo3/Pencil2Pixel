@@ -13,12 +13,14 @@ let negPromptPY = "extra digit, fewer digits, cropped, worst quality, low qualit
 let detailValuePY = 25;
 let sValuePY = 0.6;
 let pValuePY = 7.5;
+let MIValuePY = 1; // multiple images value
 
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, c.width, c.height);
 
 document.addEventListener('mousemove', draw);
 document.addEventListener('mousedown', setPosition);
+document.addEventListener('mousedown', drawDot);
 document.addEventListener('mouseenter', setPosition);
 c.addEventListener('mouseup', function () {
     states = states.slice(0, currentStateIndex + 1);
@@ -26,8 +28,21 @@ c.addEventListener('mouseup', function () {
 });
 
 function setPosition(e) {
-    pos.x = e.clientX - c.getBoundingClientRect().left;
-    pos.y = e.clientY - c.getBoundingClientRect().top;
+    pos.x = e.clientX - offsetX;
+    pos.y = e.clientY - offsetY;
+}
+
+function drawDot(e) {
+    if(e.clientX > offsetX && e.clientX < offsetX + 400 && e.clientY > offsetY && e.clientY < offsetY + 400) {
+        ctx.beginPath();
+        if(brush) {
+            ctx.fillStyle = "black";
+        } else {
+            ctx.fillStyle = "white";
+        }
+        ctx.arc(pos.x, pos.y, lineRadius/2, 0, 2 * Math.PI, false);
+        ctx.fill();
+    }
 }
 
 
@@ -96,7 +111,6 @@ function draw(e) {
         ctx.strokeStyle = "white";
         ctx.lineWidth = lineRadius + eraseOffset;
     }
-
     ctx.moveTo(pos.x, pos.y); // from
     setPosition(e);
     ctx.lineTo(pos.x, pos.y); // to
@@ -233,7 +247,7 @@ function generate() {
     const img = c.toDataURL('image/png');
     const prompt = document.getElementById("prompt").value;
     const style = document.getElementById("dropbtn").innerHTML;
-    const amountOfImages = 1; //TODO
+    const amountOfImages = MIValuePY; //TODO
     const num_inference_steps = detailValuePY;
     const negative_prompt = negPromptPY;
     const adapter_conditioning_scale = sValuePY;
@@ -261,16 +275,18 @@ function generate() {
     });
 
     XHR.done(function(data) {
-
-        // Create image element
-        const image = document.createElement("img");
-        // Set source of the image to the received base64 encoded image data
-        image.src = "data:image/png;base64," + data.image;
+        const images = data.images;
         
         // Append the image to the DOM
         const parent = document.getElementById("images");
         parent.innerHTML = "";
+        images.forEach((object) => {
+        // Create image element
+        const image = document.createElement("img");
+        // Set source of the image to the received base64 encoded image data
+        image.src = "data:image/png;base64," + object;
         parent.appendChild(image);
+        });
 
         console.log("AJAX request successful.");
         saveState();
@@ -327,6 +343,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
         sValuePY = sSlider.value;
     });
 
+    // Multiple img Slider:
+    const MISlider = document.getElementById('MISlider');
+    const MIValue = document.getElementById('MIValue');
+    MISlider.addEventListener('input', () => {
+        MIValue.textContent = MISlider.value;
+        MIValuePY = MISlider.value;
+    })
+
 });
 
 
@@ -362,15 +386,18 @@ function setDefaults() {
     const detailSlider = document.getElementById('detailSlider');
     const pSlider = document.getElementById('pSlider');
     const sSlider = document.getElementById('sSlider');
-
+    const MISlider = document.getElementById('MISlider');
+    
     detailSlider.value = 25;
     pSlider.value = 7.5;
     sSlider.value = 0.6;
-
+    MISlider.value = 1;
+    
     const detailValue = document.getElementById('detailValue');
     const pValue = document.getElementById('pValue');
     const sValue = document.getElementById('sValue');
-
+    const MIValue = document.getElementById('MIValue');
+    
     // for PYTHON:
     detailValue.textContent = detailSlider.value;
     detailValuePY = detailSlider.value;
@@ -380,6 +407,9 @@ function setDefaults() {
 
     sValue.textContent = sSlider.value;
     sValuePY = sSlider.value;
+
+    MIValue.textContent = MISlider.value;
+    MIValuePY = MISlider.value;
 }
 
 
