@@ -398,4 +398,17 @@ body {
     right: 15%; */
 }
 
+#images {
+    width: 420px;
+    margin: auto;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap:10px
+}
 
+#images img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
