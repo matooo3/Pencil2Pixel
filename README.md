@@ -1,15 +1,31 @@
 # Pencil2Pixel
 
-Willkommen zum Teamprojekt!
-In diesem Github Repository wird ein großer Teil Eurer Arbeit stattfinden. Bitte stellt sicher, dass Ihr Anforderungen im Teamprojekt lest.
+## Introduction
+Welcome to our Pencil to Pixel project!
+We generate art in various styles, based on your sketch and promt!
+To be able to do this, we use Text-to-Image Diffusion Models based on Stable Diffusion-XL.
 
-GitHub Tour
-In Issues könnt Ihr entdeckte Fehler (Bugs), User Stories und andere Tickets festhalten, damit ihr nicht vergesst diese zu bearbeiten.
 
-Pull Requests sind spezielle Issues, die dazu verwendet werden, um Code Reviews durchzuführen.
+Here are some examples of what it could look like:
 
-In Projects könnt Ihr Euch ein Sprint Board anlegen, um die nächste Iteration zu planen und Euren Fortschritt nachzuvollziehen. Eine Vorlage kann hier gefunden werden.
+Prompt: A paper airplane flying through pink clouds, birds in the backgrounds, 4k, photorealistic
 
-Das Wiki kann genutzt werden, um zum Beispiel weitere inhaltliche Anforderungen zu erfassen, die Definition-of-Done zu dokumentieren oder Protokolle und Entscheidungen des Teams festzuhalten.
+Input sketch:
 
-Actions erlauben Euch Continuous Integration (CI) und automatisiertes Testen für jeden Pull Request und jedes Release einzurichten.
+<img src="https://github.com/matooo3/Pencil2Pixel/blob/main/examples/airplane_sketch.png" alt="Input sketch" width="400"/>
+
+Output:
+
+<img src="https://github.com/matooo3/Pencil2Pixel/blob/main/examples/out_sketch_airplane8.png" alt="Output" width="400"/>
+
+
+
+## Setup
+To set up this project, you need to have Python (Add min. Version here?) installed.
+
+We recommend using a virtual environment like [Miniconda](https://docs.anaconda.com/free/miniconda/).
+
+Then you need to download all of the packages we use. To do this, just type:
+```pip install -r requirements.txt``` (We still need to create that file).
+
+
