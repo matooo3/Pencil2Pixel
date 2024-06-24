@@ -31,7 +31,8 @@ def generate():
     imgs = []
 
     for img in images:
-        # Convert the processed images to base64
+        # Resize then convert the processed images to base64
+        img.resize((400, 400))
         buffered = io.BytesIO()
         img.save(buffered, format="PNG")
         imgs.append(base64.b64encode(buffered.getvalue()).decode("utf-8"))
