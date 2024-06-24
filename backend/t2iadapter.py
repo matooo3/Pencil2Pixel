@@ -21,6 +21,7 @@ crayonsName = "crayons_v1_sdxl.safetensors"
 
 def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale):
 
+    #change style options
     match styles:
         case "Watercolor":
              modelID = watercolorID
@@ -39,7 +40,9 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
             modelName = origamiName
         case "Anime":
             modelID = photographyID
-            modelName = photographyName  
+            modelName = photographyName
+        case _:
+            modelID = "No Style"
 
     # load adapter
     adapter = T2IAdapter.from_pretrained(
@@ -61,7 +64,8 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
     pipe.enable_xformers_memory_efficient_attention()
 
     #loads the chosen style by the user
-    pipe.load_lora_weights(modelID, weight_name=modelName)
+    if(modelID != "No Style"):
+        pipe.load_lora_weights(modelID, weight_name=modelName)
     
     if image.mode != "RGB":
          image = image.convert("RGB")
