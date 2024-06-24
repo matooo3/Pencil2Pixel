@@ -377,27 +377,6 @@ body {
     cursor: pointer;
 }
 
-/*Split into LEFT and RIGHT side not below and*/
-#leftSide {
-    /* position: absolute;      (LR-Problem)
-    top: 23%;
-    left: 15%; */
-}
-
-#middleSide {
-    /* position: absolute;      (LR-Problem)
-    color: white;
-    left: 51%;
-    top: 45%;
-    scale: 7; */
-}
-
-#rightSide {
-    /* position: absolute;      (LR-Problem)
-    top: 25%;
-    right: 15%; */
-}
-
 #images {
     width: 420px;
     margin: auto;
