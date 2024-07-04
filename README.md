@@ -1,6 +1,6 @@
-# Pencil 2 Pixel
+# Pencil2Pixel
 
-Pencil 2 Pixel is an interactive web application that allows you to create high quality images based on a sketch and a prompt by using AI.
+Pencil2Pixel is an interactive web application that allows you to create high quality images based on a sketch and a prompt by using AI.
 The application is built using HTML, JavaScript, and CSS.
 
 ## Features
@@ -105,7 +105,7 @@ To run the application locally, you need to update the IP address in the scripts
 
 ## Contributing
 
-We welcome contributions to enhance Pencil 2 Pixel! Please fork the repository and submit a pull request with your changes. Ensure that your code adheres to our coding standards and includes relevant tests.
+We welcome contributions to enhance Pencil2Pixel! Please fork the repository and submit a pull request with your changes. Ensure that your code adheres to our coding standards and includes relevant tests.
 
 ## License
 
