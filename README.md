@@ -103,6 +103,10 @@ To run the application locally, you need to update the IP address in the scripts
 
    Click the "Generate" button to create an image based on your sketch and prompt.
 
+## Contributing
+
+We welcome contributions to enhance Pencil 2 Pixel! Please fork the repository and submit a pull request with your changes. Ensure that your code adheres to our coding standards and includes relevant tests.
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
