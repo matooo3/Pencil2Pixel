@@ -15,7 +15,7 @@ The application is built using HTML, JavaScript, and CSS.
 ### Prerequisites
 
 - Python 3.x installed on your system. (https://www.python.org/downloads/)
-- Conda installed on your system. #TODO
+- Conda installed on your system. (https://docs.anaconda.com/miniconda/) #TODO 
 
 ### Installation
 
