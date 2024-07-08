@@ -6,6 +6,7 @@ const eraseOffset = 5;
 var brush = true;
 var lineRadius = 5;
 var pos = { x: 0, y: 0 };
+var drawMode = true;
 let negPromptPY = "extra digit, fewer digits, cropped, worst quality, low quality, glitch, deformed, mutated, ugly, disfigured";
 
 // Slidebars:
@@ -33,6 +34,7 @@ function setPosition(e) {
 }
 
 function drawDot(e) {
+    if(!drawMode) {return;}
     if(e.clientX > offsetX && e.clientX < offsetX + 400 && e.clientY > offsetY && e.clientY < offsetY + 400) {
         ctx.beginPath();
         if(brush) {
@@ -98,7 +100,7 @@ function redo() {
 
 function draw(e) {
     // mouse left button must be pressed
-    if (e.buttons !== 1) return;
+    if (e.buttons !== 1 || !drawMode) return;
 
     ctx.beginPath();
 
@@ -244,7 +246,7 @@ function generate() {
     document.body.style.overflow = "visible";
     saveNegPrompt(); // save the negative prompt as string in negPromptPY
   
-    const img = c.toDataURL('image/png');
+    const img = (drawMode) ? c.toDataURL('image/png') : document.getElementById("upload").src;
     const prompt = document.getElementById("prompt").value;
     const style = document.getElementById("dropbtn").innerHTML;
     const amountOfImages = MIValuePY; //TODO
@@ -413,8 +415,46 @@ function setDefaults() {
 }
 
 
+function changeMode() {
+    drawMode = !drawMode;
+
+    if(drawMode) {
+        document.getElementById("mode1").style.display = "";
+        document.getElementById("mode2").style.display = "none";
+
+        document.getElementById("mode").style.marginBottom = "";
+
+        document.getElementById("modeDraw").style.color = "lightgray";
+        document.getElementById("modeUpload").style.color = "grey";
+    } else {
+        document.getElementById("mode1").style.display = "none";
+        document.getElementById("mode2").style.display = "";
+
+        document.getElementById("mode").style.marginBottom = "50px";
+
+        document.getElementById("modeDraw").style.color = "grey";
+        document.getElementById("modeUpload").style.color = "lightgray";
+
+    }
+}
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("mode2").style.display = "none";
+});
 
 
+document.getElementById("upload").addEventListener("click", function() {
+    document.getElementById("fileInput").click();
+});
 
+document.getElementById("fileInput").addEventListener("change", function(event) {
+    var file = event.target.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById("upload").src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+});
