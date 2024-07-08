@@ -262,7 +262,8 @@ function generate() {
         num_inference_steps: num_inference_steps,
         negative_prompt: negative_prompt,
         adapter_conditioning_scale: adapter_conditioning_scale,
-        guidance_scale: guidance_scale
+        guidance_scale: guidance_scale,
+        drawn: drawMode
     };
     const url = `${window.location.protocol}//${window.location.hostname}:6873/generate`;
 
