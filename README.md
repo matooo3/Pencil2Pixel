@@ -86,22 +86,39 @@ To run the application locally, you need to update the IP address in the scripts
 2. **Draw your sketch**
 
    Use the drawing tools to create a sketch on the canvas.
+   You can change the thickness of the lines on the left.
+   To undo changes, you can use the eraser, the undo/redo buttons, or the delete button. The latter clears the canvas.
 
 3. **Enter a prompt**
 
-   Input a text prompt to describe what you want the AI to generate.
+   Input a text prompt to describe the image you want the AI to generate. You can find the designated text box under the canvas.
 
-4. **Enter a prompt**
+4. **Select a style**
 
-    Select a style for your image.
+    Click on "Select Style" to see the dropdown menu of the style options. Here you can select the style you want your image to be generated with.
 
 5. **Adjust advanced settings**
 
-   Customize the advanced settings to fine-tune the generation process.
+   You customize the advanced settings to fine-tune the generation process.
+   To do this, click on "Advanced Options" and the advanced settings should appear.
+   
+   -Negative Prompt: Describe things here, that you explicitly DON'T want in your picture
+   
+   -Number of Steps: This describes the number of iterations the AI goes through when generating your image. Increasing this will lead to a more detailed image. Decreasing this will lead to quicker image generation.
+   
+   -Guidance scale: This represents how much the AI focuses on the prompt, compared to other things.
+   
+   -Adapter conditioning scale: This represents how much the AI focuses on the sketch, compared to other things
+   
+   For example: If you change the adapter conditioning scale to the maximum and reduce the guidance scale, the AI is going to pay more attention to sticking to your exact lines, than to comply with the description in the prompt.
 
-6. **Generate the image**
+   -Amount of generated images: Adjust this to generate up to 4 images at a time.
 
-   Click the "Generate" button to create an image based on your sketch and prompt.
+7. **Generate the image**
+
+   When your sketch is finished and you have entered a text prompt, you're ready to start the image generation!
+   Click the "Generate Image" button to create an image based on your sketch and prompt.
+   This might take a little, especially if you changed the advanced settings, but your image(s) should appear soon.
 
 ## Contributing
 
