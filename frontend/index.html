@@ -11,8 +11,21 @@
 <!-- <body onload="generateInitialImage()">             (LR-Problem) -->
 <body>
     <h1 id="headline">Pencil<span style="color: brown">2</span>Pixel</h1>
-    <div id="leftSide">
 
+    <div id="mode">
+        <div class="fade_rule"></div>
+        <br>
+            <div id="modes">
+                <p id="modeDraw"   onclick="changeMode()" style="color: lightgray;">Draw</p>
+                <p id="modeUpload" onclick="changeMode()" style="color: grey;">Upload</p>
+            </div>
+        <br>
+        <div class="fade_rule"></div>  
+    </div>
+
+    <div id="leftSide">
+    
+    <div id="mode1">
     <div id="tools">
         <div id="toolsleft">
             <div id="current" onclick="setBrush(true)" title="Brush"><img src="icons/brush.png" style="height: 20px; margin-top: 5px;"></div>
@@ -35,6 +48,16 @@
         </div>
         <canvas id="canv" width="400" height="400"></canvas>
     </div>
+
+    </div> <!-- mode1 -->
+
+
+    <div id="mode2">
+        <img id="upload" title="Click to upload" src="icons/upload.png" onclick="upload()">
+        <input type="file" id="fileInput" accept="image/*">
+    </div> <!-- mode2 -->
+
+
 
     <div id="input">
         <textarea id="prompt" placeholder="Enter prompt here..."></textarea>

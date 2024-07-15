@@ -21,23 +21,82 @@ body {
     text-shadow: 0px 0px 25px black;
 }
 
+#mode {
+    width: 400px;
+    margin:auto;
+    margin-bottom: 20px;
+}
+
+#modes {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    width: 80%;
+}
+
+#modes p {
+    margin: auto;
+    font-size: 20px;
+}
+
+#modes p:hover {
+    cursor: pointer;
+}
+
+.fade_rule {
+    height: 1px;
+    background-color: lightgray;
+    width: 100%;
+    margin: 0 auto;
+    background-image: linear-gradient(left , rgb(40,40,40) 2%, lightgray 50%, rgb(40,40,40) 98%);
+    background-image: -o-linear-gradient(left , rgb(40,40,40) 2%, lightgray 50%, rgb(40,40,40) 98%);
+    background-image: -moz-linear-gradient(left , rgb(40,40,40) 2%, lightgray 50%, rgb(40,40,40) 98%);
+    background-image: -webkit-linear-gradient(left , rgb(40,40,40) 2%, lightgray 50%, rgb(40,40,40) 98%);
+    background-image: -ms-linear-gradient(left , rgb(40,40,40) 2%, lightgray 50%, rgb(40,40,40) 98%);
+    background-image: -webkit-gradient(linear, left bottom, right bottom, 
+                    color-stop(0.02, rgb(40,40,40)), 
+                    color-stop(0.5, lightgray), 
+                    color-stop(0.98, rgb(40,40,40)) );
+}
+
 #draw {
     width: 500px;
     margin: auto;
     display: flex;
-
 }
 
 #canv {
     background-color: rgb(255, 255, 255);
     box-shadow: 0px 0px 40px;
     margin-top: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 19px;
     border-radius: 10px;
 }
 
 #canv:hover {
     cursor: crosshair;
+}
+
+#mode2 {
+    width: 400px;
+    margin: auto;
+}
+
+#upload{
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0px 0px 40px;
+}
+
+#upload:hover {
+    cursor: pointer;
+}
+
+#fileInput {
+    display: none;
 }
 
 #input {
