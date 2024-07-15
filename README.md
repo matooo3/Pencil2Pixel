@@ -14,8 +14,8 @@ The application is built using HTML, JavaScript, and CSS.
 
 ### Prerequisites
 
-- Python 3.x installed on your system. (https://www.python.org/downloads/)
-- Conda installed on your system. (https://docs.anaconda.com/miniconda/) #TODO 
+- Python 3.x installed on your system: [Python installation](https://www.python.org/downloads/)
+- Conda installed on your system: [Conda installation](https://docs.anaconda.com/miniconda/)
 
 ### Installation
 
@@ -36,16 +36,15 @@ The following steps must be taken in a terminal (right click => open terminal / 
 
 3. **Install the required Python packages**
 
-   (If there's a `requirements.txt` file, use the following command)
-
    ```sh
    pip install -r requirements.txt
    ```
 
 4. **Activate the Conda environment**
 
+   After following the steps in: [Conda documentation](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
    ```sh
-   conda activate t2i
+   conda activate <my-env>
    ```
 
 5. **Start the backend server**
@@ -54,28 +53,18 @@ The following steps must be taken in a terminal (right click => open terminal / 
    python3 generate.py
    ```
 
-### Update Local IP Address
+### Update Port if needed:
 
-To run the application locally, you need to update the IP address in the scripts. Open the necessary script files and replace the placeholder IP with your local IP address.
+If you already use multiple Ports, check if the port of this project is already used. If not, then you can skip this part.
 
-1. **Find your local IP address**
-
-   On most systems, you can find your local IP address by running:
+If a conflict is found, change the port number to an available one. For example, if the current port is 6873 and it’s in use, you might change it to 6874.
+Save the changes to the configuration file.
 
    ```sh
-   ipconfig (Windows)
-   ifconfig (Mac/Linux)
+   const url = `${window.location.protocol}//${window.location.hostname}:6873/generate`;
    ```
 
-2. **Update the IP address in the script files**
-
-   Open the JavaScript files in the `frontend` directory and update the IP address accordingly.
-
-   Example:
-   ```js
-   const backendUrl = 'http://YOUR_LOCAL_IP:5000';
-   ```
-   Hier war ich mir nicht mehr ganz sicher, wo das im Code ist. #TODO
+   Open the necessary Port (6873 if you didn't change it) in your Firewall.
 
 ## Usage
 
@@ -101,18 +90,18 @@ To run the application locally, you need to update the IP address in the scripts
 
    You customize the advanced settings to fine-tune the generation process.
    To do this, click on "Advanced Options" and the advanced settings should appear.
-   
-   -Negative Prompt: Describe things here, that you explicitly DON'T want in your picture
-   
-   -Number of Steps: This describes the number of iterations the AI goes through when generating your image. Increasing this will lead to a more detailed image. Decreasing this will lead to quicker image generation.
-   
-   -Guidance scale: This represents how much the AI focuses on the prompt, compared to other things.
-   
-   -Adapter conditioning scale: This represents how much the AI focuses on the sketch, compared to other things
-   
-   For example: If you change the adapter conditioning scale to the maximum and reduce the guidance scale, the AI is going to pay more attention to sticking to your exact lines, than to comply with the description in the prompt.
 
-   -Amount of generated images: Adjust this to generate up to 4 images at a time.
+   - **Negative Prompt:** Describe things here, that you explicitly DON'T want in your picture
+
+   - **Number of Steps:** This describes the number of iterations the AI goes through when generating your image. Increasing this will lead to a more detailed image. Decreasing this will lead to quicker image generation.
+
+   - **Guidance scale:** This represents how much the AI focuses on the prompt, compared to other things.
+
+   - **Adapter conditioning scale:** This represents how much the AI focuses on the sketch, compared to other things
+
+      - *For example:* If you change the adapter conditioning scale to the maximum and reduce the guidance scale, the AI is going to pay more attention to sticking to your exact lines, than to comply with the description in the prompt.
+
+   - **Amount of generated images:** Adjust this to generate up to 4 images at a time.
 
 7. **Generate the image**
 
