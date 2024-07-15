@@ -1,0 +1,6 @@
+diffusers
+torch
+flask
+flask-cors
+Pillow
+t2iadapter
