@@ -254,6 +254,8 @@ function generate() {
     const negative_prompt = negPromptPY;
     const adapter_conditioning_scale = sValuePY;
     const guidance_scale = pValuePY;
+    const clrpalette = false;
+    
     const entry = {
         image: img,
         prompt: prompt,
@@ -263,7 +265,8 @@ function generate() {
         negative_prompt: negative_prompt,
         adapter_conditioning_scale: adapter_conditioning_scale,
         guidance_scale: guidance_scale,
-        drawn: drawMode
+        drawn: drawMode,
+        colorpalette: clrpalette
     };
     const url = `${window.location.protocol}//${window.location.hostname}:6873/generate`;
 

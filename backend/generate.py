@@ -5,6 +5,7 @@ import io
 import base64
 from t2iadapter import run
 from t2i_sketchAndDepth import run_sketchAndDepth
+from multiadapters import run_multiadapter
 
 app = Flask(__name__)
 CORS(app, resources={r"/generate": {"origins": "*"}})
@@ -27,12 +28,18 @@ def generate():
     adapter_conditioning_scale = data["adapter_conditioning_scale"]
     guidance_scale = data["guidance_scale"]
     drawn = data["drawn"]
+    colorpalette = data["colorpalette"]
 
     res = make_response(jsonify({"error": "Unknown"}),500)
 
     #running function from one of the t2i scripts
-    images = run(image.resize((1111, 1111)), prompt, style, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale) if drawn else run_sketchAndDepth(image.resize((1024, 1024)), prompt, style, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale)
+    if isinstance(colorpalette, bool):
+        images = run(image.resize((1111, 1111)), prompt, style, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale) if drawn else run_sketchAndDepth(image.resize((1024, 1024)), prompt, style, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale)
+    else:
+        images = run_multiadapter(image, colorpalette, prompt, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale)
+
     imgs = []
+
 
     for img in images:
         # Convert the processed images to base64
