@@ -1,7 +1,7 @@
 const c = document.getElementById("canv");
 const ctx = c.getContext("2d");
-const offsetX = c.getBoundingClientRect().left;
-const offsetY = c.getBoundingClientRect().top;
+var offsetX = c.getBoundingClientRect().left;
+var offsetY = c.getBoundingClientRect().top;
 const eraseOffset = 5;
 var brush = true;
 var lineRadius = 5;
@@ -27,6 +27,14 @@ c.addEventListener('mouseup', function () {
     states = states.slice(0, currentStateIndex + 1);
     saveState();
 });
+
+window.addEventListener('resize', setOffsets);
+window.addEventListener('scroll', setOffsets);
+
+function setOffsets() {
+    offsetX = c.getBoundingClientRect().left;
+    offsetY = c.getBoundingClientRect().top;
+}
 
 function setPosition(e) {
     pos.x = e.clientX - offsetX;
