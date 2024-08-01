@@ -80,6 +80,8 @@ body {
 #mode2 {
     width: 400px;
     margin: auto;
+    margin-top: 30px;
+    margin-left: 50px;
 }
 
 #upload{
@@ -438,23 +440,28 @@ body {
 
 /*Split into LEFT and RIGHT side not below and*/
 #leftSide {
-    /* position: absolute;      (LR-Problem)
-    top: 23%;
-    left: 15%; */
+    position: absolute;     
+    top: 30%;
+    left: 15%;
 }
 
 #middleSide {
-    /* position: absolute;      (LR-Problem)
+    position: absolute;      
     color: white;
     left: 51%;
-    top: 45%;
-    scale: 7; */
+    top: 55%;
+    scale: 7;
 }
 
 #rightSide {
-    /* position: absolute;      (LR-Problem)
-    top: 25%;
-    right: 15%; */
+    position: absolute;      
+    right: 15%;
+    margin-top: 41px;
+    border: 4px dotted rgb(255, 255, 255); /* Reihenfolge: Breite, Stil, Farbe */
+    border-radius: 10px;
+    width: 400px;
+    height: 400px;
+    
 }
 
 

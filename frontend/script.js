@@ -438,6 +438,9 @@ function changeMode() {
 
         document.getElementById("modeDraw").style.color = "lightgray";
         document.getElementById("modeUpload").style.color = "grey";
+        document.getElementById("inputAll").style.marginLeft = "0px";
+        document.getElementById("rightSide").style.marginTop = "41px";
+
     } else {
         document.getElementById("mode1").style.display = "none";
         document.getElementById("mode2").style.display = "";
@@ -446,6 +449,9 @@ function changeMode() {
 
         document.getElementById("modeDraw").style.color = "grey";
         document.getElementById("modeUpload").style.color = "lightgray";
+
+        document.getElementById("inputAll").style.marginLeft = "49px";
+        document.getElementById("rightSide").style.marginTop = "11px";
 
     }
 }

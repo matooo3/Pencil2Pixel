@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,137 +9,157 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
-<!-- <body onload="generateInitialImage()">             (LR-Problem) -->
+<!-- <body onload="generateInitialImage()">             -->
+
 <body>
     <h1 id="headline">Pencil<span style="color: brown">2</span>Pixel</h1>
+
 
     <div id="mode">
         <div class="fade_rule"></div>
         <br>
-            <div id="modes">
-                <p id="modeDraw"   onclick="changeMode()" style="color: lightgray;">Draw</p>
-                <p id="modeUpload" onclick="changeMode()" style="color: grey;">Upload</p>
-            </div>
+        <div id="modes">
+            <p id="modeDraw" onclick="changeMode()" style="color: lightgray;">Draw</p>
+            <p id="modeUpload" onclick="changeMode()" style="color: grey;">Upload</p>
+        </div>
         <br>
-        <div class="fade_rule"></div>  
+        <div class="fade_rule"></div>
     </div>
-
     <div id="leftSide">
+
+        <div id="mode1">
+            <div id="tools">
+                <div id="toolsleft">
+                    <div id="current" onclick="setBrush(true)" title="Brush"><img src="icons/brush.png"
+                            style="height: 20px; margin-top: 5px;"></div>
+                    <div id="eraser" onclick="setBrush(false)" title="Eraser"><img src="icons/eraser.png"
+                            style="height: 21px; margin-top: 5px;"></div>
+                </div>
+                <div id="toolsright">
+                    <div id="undo" onclick="undo()" title="Undo"><img src="icons/undo.png"
+                            style="height: 20px; margin-top: 4px;"></div>
+                    <div id="redo" onclick="redo()" title="Redo"><img src="icons/undo.png"
+                            style="height: 20px; margin-top: 4px;transform: scaleX(-1);"></div>
+                    <div id="clear" onclick="clearCanvas()" title="Clear"><img src="icons/clear.png"
+                            style="height: 20px; margin-top: 5px"></div>
+                </div>
+            </div>
+
+            <div id="draw">
+                <div id="sizes">
+                    <div id="size" onclick="setWidth(30, this)" title="30 pixels"><img src="icons/circle.png"
+                            width="30"></div>
+                    <div id="size" onclick="setWidth(20, this)" title="20 pixels"><img src="icons/circle.png"
+                            width="20"></div>
+                    <div id="size" onclick="setWidth(10, this)" title="10 pixels"><img src="icons/circle.png"
+                            width="10"></div>
+                    <div id="selected" onclick="setWidth(5, this)" title="5 pixels"><img src="icons/circle.png"
+                            width="5"></div>
+                    <div id="size" onclick="setWidth(3, this)" title="3 pixels"><img src="icons/circle.png" width="3">
+                    </div>
+                </div>
+                <canvas id="canv" width="400" height="400"></canvas>
+            </div>
+
+        </div> <!-- mode1 -->
+
+
+        <div id="mode2">
+            <img id="upload" title="Click to upload" src="icons/upload.png" onclick="upload()">
+            <input type="file" id="fileInput" accept="image/*">
+        </div> <!-- mode2 -->
+
+        <div id="inputAll">
+            <div id="input">
+                <textarea id="prompt" placeholder="Enter prompt here..."></textarea>
+                <br><br>
+                <div id="dropdown">
+                    <button id="dropbtn">Select Style</button>
+                    <div id="dropdown-content">
+                        <a id="nostyle" onclick="changeStyle(0)">No Style</a>
+                        <a id="photography" onclick="changeStyle(1)">Photography</a>
+                        <a id="embroidery" onclick="changeStyle(2)">Embroidery</a>
+                        <a id="origami" onclick="changeStyle(3)">Origami</a>
+                        <a id="anime" onclick="changeStyle(4)">Anime</a>
+                        <a id="watercolor" onclick="changeStyle(5)">Watercolor</a>
+                        <a id="crayon" onclick="changeStyle(6)">Crayon</a>
+                    </div>
+                </div>
+                <!-- !this was where the style selector is now! div id="logo"><p style="text-shadow: 2px 2px 5px black;">Pencil<span style="color: brown">2</span>Pixel</p></div-->
+                <div id="submit" onclick="generate()">Generate Images</div>
+            </div>
     
-    <div id="mode1">
-    <div id="tools">
-        <div id="toolsleft">
-            <div id="current" onclick="setBrush(true)" title="Brush"><img src="icons/brush.png" style="height: 20px; margin-top: 5px;"></div>
-            <div id="eraser" onclick="setBrush(false)" title="Eraser"><img src="icons/eraser.png" style="height: 21px; margin-top: 5px;"></div>
-        </div>
-        <div id="toolsright">
-            <div id="undo" onclick="undo()" title="Undo"><img src="icons/undo.png" style="height: 20px; margin-top: 4px;"></div>
-            <div id="redo" onclick="redo()" title="Redo"><img src="icons/undo.png" style="height: 20px; margin-top: 4px;transform: scaleX(-1);"></div>
-            <div id="clear" onclick="clearCanvas()" title="Clear"><img src="icons/clear.png" style="height: 20px; margin-top: 5px"></div>
-        </div>
-    </div>
-
-    <div id="draw">
-        <div id="sizes">
-            <div id="size" onclick="setWidth(30, this)" title="30 pixels"><img src="icons/circle.png" width="30"></div>
-            <div id="size" onclick="setWidth(20, this)" title="20 pixels"><img src="icons/circle.png" width="20"></div>
-            <div id="size" onclick="setWidth(10, this)" title="10 pixels"><img src="icons/circle.png" width="10"></div>
-            <div id="selected" onclick="setWidth(5, this)" title="5 pixels"><img src="icons/circle.png" width="5"></div>
-            <div id="size" onclick="setWidth(3, this)" title="3 pixels"><img src="icons/circle.png" width="3"></div>
-        </div>
-        <canvas id="canv" width="400" height="400"></canvas>
-    </div>
-
-    </div> <!-- mode1 -->
-
-
-    <div id="mode2">
-        <img id="upload" title="Click to upload" src="icons/upload.png" onclick="upload()">
-        <input type="file" id="fileInput" accept="image/*">
-    </div> <!-- mode2 -->
-
-
-
-    <div id="input">
-        <textarea id="prompt" placeholder="Enter prompt here..."></textarea>
-        <br><br>
-        <div id="dropdown">
-            <button id="dropbtn">Select Style</button>
-            <div id="dropdown-content">
-                <a id="nostyle" onclick="changeStyle(0)">No Style</a>
-                <a id="photography" onclick="changeStyle(1)">Photography</a>
-                <a id="embroidery" onclick="changeStyle(2)">Embroidery</a>
-                <a id="origami" onclick="changeStyle(3)">Origami</a>
-                <a id="anime" onclick="changeStyle(4)">Anime</a>
-                <a id="watercolor" onclick="changeStyle(5)">Watercolor</a>
-                <a id="crayon" onclick="changeStyle(6)">Crayon</a>
-            </div>
-        </div>
-        <!-- !this was where the style selector is now! div id="logo"><p style="text-shadow: 2px 2px 5px black;">Pencil<span style="color: brown">2</span>Pixel</p></div-->
-        <div id="submit" onclick="generate()">Generate Images</div>
-    </div>
+            <div id="advanced-dropdown">
+                <div id="advanced-dropbtn-container">
+                    <button id="advanced-dropbtn" onclick="toggleAdvancedDropdown()">Advanced Options<span
+                            id="dropdown-arrow">▼</span></button>
+                </div>
+                <div id="advanced-dropdown-content">
     
-    <div id="advanced-dropdown">
-        <div id="advanced-dropbtn-container">
-            <button id="advanced-dropbtn" onclick="toggleAdvancedDropdown()">Advanced Options<span id="dropdown-arrow">▼</span></button>
+                    <div class="negPrompt-container">
+                        <p id="detaiText">Negative Prompt:</p>
+                        <textarea id="negPrompt"
+                            placeholder="Enter negative prompt here...">extra digit, fewer digits, cropped, worst quality, low quality, glitch, deformed, mutated, ugly, disfigured</textarea>
+                    </div>
+    
+                    <div class="slider-container">
+                        <div class="detail-container">
+                            <p id="detaiText">Number of steps: <span id="detailValue">25</span></p>
+                            <span class="slider-label">0</span>
+                            <input title="increase / decrease detail value" type="range" min="0" max="50" value="25"
+                                step="1" class="slider" id="detailSlider">
+                            <span class="slider-label">50</span>
+                        </div>
+    
+                        <div class="p-container">
+                            <p id="detaiText">Guidance scale: <span id="pValue">7.5</span></p>
+                            <span class="slider-label">0</span>
+                            <input title="Prompt" type="range" min="0" max="15" value="7.5" step="0.5" class="slider"
+                                id="pSlider">
+                            <span class="slider-label">15</span>
+                        </div>
+    
+                        <div class="s-container">
+                            <p id="detaiText">Adapter conditioning scale: <span id="sValue">0.6</span></p>
+                            <span class="slider-label">0</span>
+                            <input title="Sketch" type="range" min="0" max="1" value="0.6" step="0.1" class="slider"
+                                id="sSlider">
+                            <span class="slider-label">1</span>
+                        </div>
+    
+                        <div>
+                            <p id="detaiText">Amount of generated images: <span id="MIValue">1</span></p>
+                            <span class="" slider-label>1</span>
+                            <input title="multiple images" type="range" min="1" max="4" value="1" step="1"
+                                class="slider" id="MISlider">
+                            <span class="" slider-label>4</span>
+                        </div>
+    
+                    </div>
+    
+                    <div id="defaultValues-container">
+                        <p>Reset to default values: <button onclick="setDefaults()" id="defaultBtn">↻</button></p>
+                    </div>
+    
+                </div>
+            </div>
         </div>
-        <div id="advanced-dropdown-content">
-
-            <div class="negPrompt-container">
-                <p id="detaiText">Negative Prompt:</p>
-                <textarea id="negPrompt" placeholder="Enter negative prompt here...">extra digit, fewer digits, cropped, worst quality, low quality, glitch, deformed, mutated, ugly, disfigured</textarea>
-            </div>
-
-            <div class="slider-container">
-                <div class="detail-container">
-                    <p id="detaiText">Number of steps: <span id="detailValue">25</span></p>
-                    <span class="slider-label">0</span>
-                    <input title="increase / decrease detail value" type="range" min="0" max="50" value="25" step="1" class="slider" id="detailSlider">
-                    <span class="slider-label">50</span>
-                </div>
-                
-                <div class="p-container">
-                    <p id="detaiText">Guidance scale: <span id="pValue">7.5</span></p>
-                    <span class="slider-label">0</span>
-                    <input title="Prompt" type="range" min="0" max="15" value="7.5" step="0.5" class="slider" id="pSlider">
-                    <span class="slider-label">15</span>
-                </div>
-
-                <div class="s-container">
-                    <p id="detaiText">Adapter conditioning scale: <span id="sValue">0.6</span></p>
-                    <span class="slider-label">0</span>
-                    <input title="Sketch" type="range" min="0" max="1" value="0.6" step="0.1" class="slider" id="sSlider">
-                    <span class="slider-label">1</span>
-                </div>
-
-                <div>
-                    <p id="detaiText">Amount of generated images: <span id="MIValue">1</span></p>
-                    <span class=""slider-label>1</span>
-                    <input title="multiple images" type="range" min="1" max="4" value="1" step="1" class="slider" id="MISlider">
-                    <span class=""slider-label>4</span>
-                </div>
-
-            </div>
-
-            <div id="defaultValues-container">
-                <p>Reset to default values: <button onclick="setDefaults()" id="defaultBtn">↻</button></p>
-            </div>
-
-        </div>
-    </div>
-
+        
     </div> <!-- end of leftSide -->
+
     
-    <!-- <div id="middleSide">         (LR-Problem)
+
+    <div id="middleSide">
         <p>
             ➔
         </p>
-    </div> -->
+    </div>
 
     <div id="rightSide">
-        <div id="images" style="width: 400px; margin: auto; margin-top: 20px;"></div>
+        <div id="images" style="width: 400px; margin: auto; margin-top: 0px;"></div> <!--margintop 20px zuerst-->
     </div> <!-- end of rightSide -->
 
     <script src="script.js" defer></script>
 </body>
+
 </html>
