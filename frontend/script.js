@@ -476,3 +476,45 @@ document.getElementById("fileInput").addEventListener("change", function(event) 
         reader.readAsDataURL(file);
     }
 });
+
+
+document.addEventListener("DOMContentLoaded",function(){
+	this.querySelector(".icon").addEventListener("click",function(){
+		let waitClass = "waiting",
+			runClass = "running",
+			cl = this.classList;
+
+		if (!cl.contains(waitClass) && !cl.contains(runClass)) {
+			cl.add(waitClass);
+			setTimeout(function(){
+				cl.remove(waitClass);
+				setTimeout(function(){
+					cl.add(runClass);
+					setTimeout(function(){
+						cl.remove(runClass);
+					}, 4000);
+				}, 200);
+			}, 1800);
+		}
+         // Finde den Container, der die Bilder enthält
+    const imagesContainer = document.getElementById('images');
+    
+    // Finde das erste Bild innerhalb des Containers
+    const firstImage = imagesContainer.querySelector('img');
+    
+    // Prüfen, ob ein Bild gefunden wurde
+    if (firstImage) {
+        // Erstelle einen Link zum Herunterladen des Bildes
+        const link = document.createElement('a');
+        link.href = firstImage.src;
+        link.download = 'picture_1.jpg'; // Name des heruntergeladenen Bildes
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } else {
+        console.log('Kein Bild gefunden.');
+    }
+	});
+});
+
+
