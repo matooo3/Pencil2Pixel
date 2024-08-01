@@ -40,14 +40,18 @@ The following steps must be taken in a terminal (right click => open terminal / 
    pip install -r requirements.txt
    ```
 
-4. **Activate the Conda environment**
-
-   After following the steps in: [Conda documentation](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
+4. **Set up the Conda environment**
    ```sh
-   conda activate <my-env>
+   conda env create -f environment.yml
+   ```
+   
+5. **Activate the Conda environment**
+
+   ```sh
+   conda activate t2i
    ```
 
-5. **Start the backend server**
+6. **Start the backend server**
 
    ```sh
    python3 generate.py
