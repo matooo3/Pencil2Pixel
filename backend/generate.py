@@ -36,7 +36,7 @@ def generate():
     if isinstance(colorpalette, bool):
         images = run(image.resize((1111, 1111)), prompt, style, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale) if drawn else run_sketchAndDepth(image.resize((1024, 1024)), prompt, style, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale)
     else:
-        images = run_multiadapter(image, colorpalette, prompt, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale)
+        images = run_multiadapter(image, prompt, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale)
 
     imgs = []
 
