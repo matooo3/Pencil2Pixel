@@ -2,49 +2,15 @@ from diffusers import StableDiffusionXLAdapterPipeline, MultiAdapter, T2IAdapter
 from diffusers.utils import load_image, make_image_grid
 from controlnet_aux.pidi import PidiNetDetector
 from controlnet_aux.midas import MidasDetector
+from styles import chooseStyle
 import torch
-
-
-#links to the huggingface website on which the sdxl files are located
-photographyID = "f0ster/PhotographyLoRA"
-embroideryID = "ostris/embroidery_style_lora_sdxl"
-origamiID = "RalFinger/origami-style-sdxl-lora"
-animeID = "Linaqruf/pastel-anime-xl-lora"
-watercolorID = "ostris/watercolor_style_lora_sdxl"
-crayonsID = "ostris/crayon_style_lora_sdxl"
-
-#Names of the safetensor files on the huggingface website
-photographyName = "photography-lora-xl_10.safetensors"
-embroideryName = "embroidered_style_v1_sdxl.safetensors"
-origamiName = "ral-orgmi-sdxl.safetensors"
-animeName = "pastel-anime-xl-latest.safetensors"
-watercolorName = "watercolor_v1_sdxl.safetensors"
-crayonsName = "crayons_v1_sdxl.safetensors"
 
 def run_sketchAndDepth(image, prompt, styles, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale):
 
-    # change the chosen style
-    match styles:
-        case "Watercolor":
-            modelID = watercolorID
-            modelName = watercolorName
-        case "Photography":
-            modelID = photographyID
-            modelName = photographyName
-        case "Embroidery":
-            modelID = embroideryID
-            modelName = embroideryName
-        case "Crayon":
-            modelID = crayonsID
-            modelName = crayonsName
-        case "Origami":
-            modelID = origamiID
-            modelName = origamiName
-        case "Anime":
-            modelID = photographyID
-            modelName = photographyName
-        case _:
-            modelID = "No Style"
+    #load style name and ID chosen by User
+    styleIDandName = chooseStyle(styles)
+    modelID = styleIDandName[0]
+    modelName = styleIDandName[1]
 
     # load 2 adapters with new MultiAdapter function
     adapters = MultiAdapter(
@@ -53,7 +19,6 @@ def run_sketchAndDepth(image, prompt, styles, amountOfImages, num_inference_step
         ])
 
     adapters = adapters.to(torch.float16)    
-    imageArray = []
 
     # load euler_a scheduler
     model_id = 'stabilityai/stable-diffusion-xl-base-1.0'
@@ -80,8 +45,6 @@ def run_sketchAndDepth(image, prompt, styles, amountOfImages, num_inference_step
       image, detect_resolution=1024, image_resolution=1024, apply_filter=True
      )
     
-
-
     #loads the chosen style by the user
     if(modelID != "No Style"):
          pipe.load_lora_weights(modelID, weight_name=modelName)
@@ -91,7 +54,7 @@ def run_sketchAndDepth(image, prompt, styles, amountOfImages, num_inference_step
          depth_image = depth_image.convert("RGB")
 
     try:
-        #multiple images for multiple adapters
+        #Cast arguments to make sure they are of the right type
         i = int(amountOfImages)
         num_inference_steps = int(num_inference_steps)
         adapter_conditioning_scale = float(adapter_conditioning_scale)
@@ -114,7 +77,8 @@ def run_sketchAndDepth(image, prompt, styles, amountOfImages, num_inference_step
                 guidance_scale=guidance_scale,
             ).images[0]
 
-            imageArray.append(gen_images)
+            resultArray = []
+            resultArray.append(gen_images)
 
             print("Generated image successfully")
 
@@ -122,6 +86,6 @@ def run_sketchAndDepth(image, prompt, styles, amountOfImages, num_inference_step
             i -= 1
             print("Image saved successfully")
 
-        return imageArray
+        return resultArray
     except Exception as e:
         print(f"An error occurred during image generation: {e}")
