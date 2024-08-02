@@ -470,3 +470,34 @@ document.getElementById("fileInput").addEventListener("change", function(event) 
         reader.readAsDataURL(file);
     }
 });
+
+// Add event listeners to all elements with a data-tooltip attribute
+document.querySelectorAll('[data-tooltip]').forEach(element => {
+    element.addEventListener('mouseover', event => {
+        // Create a tooltip element
+        let tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
+        tooltip.innerHTML = element.getAttribute('data-tooltip');
+
+        // Add the tooltip to the body
+        document.body.appendChild(tooltip);
+
+        // Set the tooltip's position
+        let rect = element.getBoundingClientRect();
+        tooltip.style.position = 'absolute';
+        tooltip.style.top = `${rect.top + window.scrollY - tooltip.offsetHeight}px`;
+        tooltip.style.left = `${rect.left + window.scrollX}px`;
+
+        // Show the tooltip
+        tooltip.style.visibility = 'visible';
+        tooltip.style.opacity = '1';
+    });
+
+    element.addEventListener('mouseout', event => {
+        // Remove the tooltip
+        let tooltip = document.querySelector('.tooltip');
+        if (tooltip) {
+            tooltip.remove();
+        }
+    });
+});
