@@ -845,4 +845,22 @@ body {
 	to {transform: rotate(1turn)}
 }
 
+/*show explanation of advanced options */
+.tooltip {
+    position: absolute;
+    background-color: #ccc;
+    border: 1px solid #aaa;
+    padding: 5px;
+    font-size: 14px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 1000;
+    border-radius: 5px;
+}
+
+.tooltip:hover {
+    visibility: visible;
+    opacity: 1;
+}
 
