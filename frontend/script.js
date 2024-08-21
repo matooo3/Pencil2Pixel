@@ -42,15 +42,15 @@ function setPosition(e) {
 }
 
 function drawDot(e) {
-    if(!drawMode) {return;}
-    if(e.clientX > offsetX && e.clientX < offsetX + 400 && e.clientY > offsetY && e.clientY < offsetY + 400) {
+    if (!drawMode) { return; }
+    if (e.clientX > offsetX && e.clientX < offsetX + 400 && e.clientY > offsetY && e.clientY < offsetY + 400) {
         ctx.beginPath();
-        if(brush) {
+        if (brush) {
             ctx.fillStyle = "black";
         } else {
             ctx.fillStyle = "white";
         }
-        ctx.arc(pos.x, pos.y, lineRadius/2, 0, 2 * Math.PI, false);
+        ctx.arc(pos.x, pos.y, lineRadius / 2, 0, 2 * Math.PI, false);
         ctx.fill();
     }
 }
@@ -253,7 +253,7 @@ document.getElementById("dropdown").addEventListener("mouseleave", function () {
 function generate() {
     document.body.style.overflow = "visible";
     saveNegPrompt(); // save the negative prompt as string in negPromptPY
-  
+
     const img = (drawMode) ? c.toDataURL('image/png') : document.getElementById("upload").src;
     const prompt = document.getElementById("prompt").value;
     const style = document.getElementById("dropbtn").innerHTML;
@@ -263,7 +263,7 @@ function generate() {
     const adapter_conditioning_scale = sValuePY;
     const guidance_scale = pValuePY;
     const clrpalette = false;
-    
+
     const entry = {
         image: img,
         prompt: prompt,
@@ -288,29 +288,29 @@ function generate() {
         dataType: "json"
     });
 
-    XHR.done(function(data) {
+    XHR.done(function (data) {
         const images = data.images;
-        
+
         // Append the image to the DOM
         const parent = document.getElementById("images");
         parent.innerHTML = "";
         images.forEach((object) => {
-        // Create image element
-        const image = document.createElement("img");
-        // Set source of the image to the received base64 encoded image data
-        image.src = "data:image/png;base64," + object;
-        parent.appendChild(image);
+            // Create image element
+            const image = document.createElement("img");
+            // Set source of the image to the received base64 encoded image data
+            image.src = "data:image/png;base64," + object;
+            parent.appendChild(image);
         });
 
         console.log("AJAX request successful.");
         saveState();
     });
 
-    XHR.fail(function(XHR, textStatus, errorThrown) {
+    XHR.fail(function (XHR, textStatus, errorThrown) {
         console.error("Error:", textStatus, errorThrown);
     });
 
-    XHR.always(function() {
+    XHR.always(function () {
         console.log("AJAX request finished.");
     });
 }
@@ -401,17 +401,17 @@ function setDefaults() {
     const pSlider = document.getElementById('pSlider');
     const sSlider = document.getElementById('sSlider');
     const MISlider = document.getElementById('MISlider');
-    
+
     detailSlider.value = 25;
     pSlider.value = 7.5;
     sSlider.value = 0.6;
     MISlider.value = 1;
-    
+
     const detailValue = document.getElementById('detailValue');
     const pValue = document.getElementById('pValue');
     const sValue = document.getElementById('sValue');
     const MIValue = document.getElementById('MIValue');
-    
+
     // for PYTHON:
     detailValue.textContent = detailSlider.value;
     detailValuePY = detailSlider.value;
@@ -429,46 +429,86 @@ function setDefaults() {
 
 function changeMode() {
     drawMode = !drawMode;
-
-    if(drawMode) {
+    if (drawMode) {
         document.getElementById("mode1").style.display = "";
         document.getElementById("mode2").style.display = "none";
-
         document.getElementById("mode").style.marginBottom = "";
 
         document.getElementById("modeDraw").style.color = "lightgray";
         document.getElementById("modeUpload").style.color = "grey";
+        document.getElementById("inputAll").style.marginLeft = "0px";
+        document.getElementById("rightSide").style.marginTop = "41px";
+
     } else {
         document.getElementById("mode1").style.display = "none";
         document.getElementById("mode2").style.display = "";
-
-        document.getElementById("mode").style.marginBottom = "50px";
-
         document.getElementById("modeDraw").style.color = "grey";
         document.getElementById("modeUpload").style.color = "lightgray";
+
+        document.getElementById("inputAll").style.marginLeft = "49px";
+        document.getElementById("rightSide").style.marginTop = "11px";
 
     }
 }
 
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("mode2").style.display = "none";
 });
 
 
-document.getElementById("upload").addEventListener("click", function() {
+document.getElementById("upload").addEventListener("click", function () {
     document.getElementById("fileInput").click();
 });
 
-document.getElementById("fileInput").addEventListener("change", function(event) {
+document.getElementById("fileInput").addEventListener("change", function (event) {
     var file = event.target.files[0];
     if (file) {
         var reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             document.getElementById("upload").src = e.target.result;
         };
         reader.readAsDataURL(file);
     }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    this.querySelector(".icon").addEventListener("click", function () {
+        let waitClass = "waiting",
+            runClass = "running",
+            cl = this.classList;
+
+        if (!cl.contains(waitClass) && !cl.contains(runClass)) {
+            cl.add(waitClass);
+            setTimeout(function () {
+                cl.remove(waitClass);
+                setTimeout(function () {
+                    cl.add(runClass);
+                    setTimeout(function () {
+                        cl.remove(runClass);
+                    }, 4000);
+                }, 200);
+            }, 1800);
+        }
+        // Finde den Container, der die Bilder enthält
+        const imagesContainer = document.getElementById('images');
+
+        // Finde das erste Bild innerhalb des Containers
+        const firstImage = imagesContainer.querySelector('img');
+
+        // Prüfen, ob ein Bild gefunden wurde
+        if (firstImage) {
+            // Erstelle einen Link zum Herunterladen des Bildes
+            const link = document.createElement('a');
+            link.href = firstImage.src;
+            link.download = 'picture_1.jpg'; // Name des heruntergeladenen Bildes
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } else {
+            console.log('Kein Bild gefunden.');
+        }
+    });
 });
 
 // Add event listeners to all elements with a data-tooltip attribute
