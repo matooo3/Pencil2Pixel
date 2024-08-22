@@ -428,22 +428,35 @@ function setDefaults() {
 
 
 function changeMode() {
+    const body = document.body;
     drawMode = !drawMode;
     if (drawMode) {
         document.getElementById("mode1").style.display = "";
         document.getElementById("mode2").style.display = "none";
         document.getElementById("mode").style.marginBottom = "";
 
-        document.getElementById("modeDraw").style.color = "lightgray";
-        document.getElementById("modeUpload").style.color = "grey";
+        if (body.classList.contains('light-mode')) {
+            document.getElementById("modeDraw").style.color = "grey";
+            document.getElementById("modeUpload").style.color = "darkgrey";
+        } else {
+            document.getElementById("modeDraw").style.color = "lightgray";
+            document.getElementById("modeUpload").style.color = "grey";
+        }
+
         document.getElementById("inputAll").style.marginLeft = "0px";
         document.getElementById("rightSide").style.marginTop = "41px";
 
     } else {
         document.getElementById("mode1").style.display = "none";
         document.getElementById("mode2").style.display = "";
-        document.getElementById("modeDraw").style.color = "grey";
-        document.getElementById("modeUpload").style.color = "lightgray";
+
+        if (body.classList.contains('light-mode')) {
+            document.getElementById("modeDraw").style.color = "darkgrey";
+            document.getElementById("modeUpload").style.color = "gray";
+        } else {
+            document.getElementById("modeDraw").style.color = "grey";
+            document.getElementById("modeUpload").style.color = "lightgray";
+        }
 
         document.getElementById("inputAll").style.marginLeft = "49px";
         document.getElementById("rightSide").style.marginTop = "11px";
@@ -541,3 +554,48 @@ document.querySelectorAll('[data-tooltip]').forEach(element => {
         }
     });
 });
+
+const toggleButton = document.getElementById('mode-toggle');
+const body = document.body;
+
+// Prüfen, ob ein Modus in den lokalen Speicher gespeichert ist
+if (localStorage.getItem('mode') === 'light') {
+    body.classList.add('light-mode');
+    toggleButton.textContent = 'Change to Darkmode';
+}
+
+// Eventlistener für den Moduswechsel
+toggleButton.addEventListener('click', () => {
+    document.getElementById("modeDraw").style.color = "grey";
+    document.getElementById("modeUpload").style.color = "darkgrey";
+    body.classList.toggle('light-mode');
+
+    if (body.classList.contains('light-mode')) {
+        toggleButton.textContent = 'Change to Darkmode';
+        localStorage.setItem('mode', 'light');
+    } else {
+        toggleButton.textContent = 'Change to Lightmode';
+        localStorage.setItem('mode', 'dark');
+    }
+});
+
+function loadCurrentMode() {
+    if (drawMode) {
+        if (body.classList.contains('light-mode')) {
+            document.getElementById("modeDraw").style.color = "grey";
+            document.getElementById("modeUpload").style.color = "darkgrey";
+        } else {
+            document.getElementById("modeDraw").style.color = "lightgray";
+            document.getElementById("modeUpload").style.color = "grey";
+        }
+    } else {
+        if (body.classList.contains('light-mode')) {
+            document.getElementById("modeDraw").style.color = "darkgrey";
+            document.getElementById("modeUpload").style.color = "gray";
+        } else {
+            document.getElementById("modeDraw").style.color = "grey";
+            document.getElementById("modeUpload").style.color = "lightgray";
+        }
+
+    }
+}
