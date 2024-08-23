@@ -11,7 +11,7 @@
 
 <!-- <body onload="generateInitialImage()">             (LR-Problem) -->
 
-<body>
+<body onload="loadCurrentMode()">
     <h1 id="headline">Pencil<span style="color: brown">2</span>Pixel</h1>
 
     <div id="mode">
@@ -167,7 +167,7 @@
         <div id="images" style="width: 400px; margin: auto; margin-top: 20px;"></div>
     </div> <!-- end of rightSide -->
 
-
+    
     <button type="button" class="icon">
         <div class="cloud">
             <div class="puff puff-1"></div>
@@ -196,6 +196,8 @@
         </div>
         <div class="progress"></div>
     </button>
+
+    <button id="mode-toggle">Change to Lightmode</button>
 
     <script src="script.js" defer></script>
 </body>
