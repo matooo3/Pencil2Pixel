@@ -5,7 +5,7 @@ from PIL import Image
 import torch
 
 
-def run_multiadapter(image, prompt, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale):
+def run_multiadapter(image, colorpalette, prompt, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale):
     # load 2 adapters (color adapter and depth) with MultiAdapter function
     adapters = MultiAdapter(
         [T2IAdapter.from_pretrained("TencentARC/t2iadapter_zoedepth_sd15v1", torch_dtype=torch.float16),
@@ -13,9 +13,8 @@ def run_multiadapter(image, prompt, amountOfImages, num_inference_steps, negativ
         ]).to(torch.float16)
 
     #loading color palette which will be used for the color adapter
-    color_image = load_image(
-        "color_palette_clouds.jpg"
-    )
+    color_image = colorpalette
+
     #resizing to 8 by 8 pixels to generate at max 64 colors
     color_palette = color_image.resize((8, 8))
     color_palette = color_palette.resize((512, 512), resample=Image.Resampling.NEAREST) # pil image 512,512
@@ -31,10 +30,8 @@ def run_multiadapter(image, prompt, amountOfImages, num_inference_steps, negativ
      ).to("cuda")
     pipe.enable_xformers_memory_efficient_attention()
 
-    #pidinet edge detection
-    pidinet = PidiNetDetector.from_pretrained("lllyasviel/Annotators")
     #loading depth image and downsizing it for better performance and compatibility
-    depth_image = load_image("extractedDepth.png")
+    depth_image = image
     depth_image = depth_image.resize((512, 512), resample=Image.Resampling.NEAREST) # pil image 512,512
     depth_image.save('weird_sketch.png')
     
