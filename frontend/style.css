@@ -889,10 +889,10 @@ body.light-mode {
     color: rgb(40, 40, 40);
 }
 
-body.light-mode #mode-toggle{
-    background-color: rgb(40, 40, 40);
+/* body.light-mode #mode-toggle{
+    background-color: rgb(68, 68, 68);
     color: rgb(220, 220, 220);
-}
+} */
 
 /* Cloud-lightMode */
 body.light-mode .icon {
@@ -902,16 +902,16 @@ body.light-mode .icon {
 }
 
 body.light-mode .puff, body.light-mode .cloud-core, body.light-mode .progress {
-	background-color: rgb(40, 40, 40);
+	background-color: rgb(68, 68, 68);
 }
 
 /* Arrow */
 body.light-mode #middleSide{
-    color: rgb(40, 40, 40);
+    color: rgb(68, 68, 68);
 }
 
 body.light-mode #rightSide{
-    border: 4px dotted rgb(40, 40, 40);
+    border: 4px dotted rgb(68, 68, 68);
     
 }
 
@@ -930,4 +930,79 @@ body.light-mode #advanced-dropdown-content{
 body.light-mode #submit, body.light-mode #canv, body.light-mode #prompt, body.light-mode #dropbtn{
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.682);
 }
+
+/* TOGGLE BUTTON FOR DARKMODE */
+.labelDM {
+    width:500px;
+    height:200px;
+    position: relative;
+    display: block;
+    background: #ffffff;
+    border-radius: 200px;
+    box-shadow: inset 0px 5px 15px rgba(0,0,0,0.4), inset 0px -5px 15px rgba(255,255,255,0.4);
+    cursor: pointer;
+  }
+
+  .labelDM:after {
+    content: "";
+    width:180px;
+    height: 180px;
+    position: absolute;
+    top:10px;
+    left:10px;
+    background: linear-gradient(180deg,#ffcc89,#d8860b);
+    border-radius: 180px;
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
+  }
+  .inputDM {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+  }
+
+  .inputDM:checked + .labelDM {
+    background: #767676;
+  }
+  .inputDM:checked + .labelDM:after {
+    left:490px;
+    transform: translateX(-100%);
+    background: linear-gradient(180deg,#777,#030202);
+  }
+  .labelDM, .labelDM:after {
+    transition: 0.3s
+  }
+
+  .labelDM:active:after{ 
+    width: 260px; 
+  }
+
+  .labelDM svg {
+    position: absolute;
+    width: 120px;
+    top:-300px;
+    z-index: 100;
+  }
+  .labelDM svg.sun {
+    left:40px;
+    fill:#fff;
+    transition: 0.3s;
+  }
+  .labelDM svg.moon {
+    left:340px;
+    fill:#7e7e7e;
+    transition: 0.3s;
+  }
+  .inputDM:checked + .labelDM svg.sun {
+    fill:#7e7e7e;
+  }
+  .inputDM:checked + .labelDM svg.moon {
+    fill:#fff;
+  }
+
+  #darkmode-container {
+    scale: 0.2;
+    position: absolute;
+    top: -15px;
+    right: 40px;
+  }
 

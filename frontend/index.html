@@ -70,88 +70,89 @@
         </div> <!-- mode2 -->
 
 
-
-        <div id="input">
-            <textarea id="prompt" placeholder="Enter prompt here..."></textarea>
-            <br><br>
-            <div id="dropdown">
-                <button id="dropbtn">Select Style</button>
-                <div id="dropdown-content">
-                    <a id="nostyle" onclick="changeStyle(0)">No Style</a>
-                    <a id="photography" onclick="changeStyle(1)">Photography</a>
-                    <a id="embroidery" onclick="changeStyle(2)">Embroidery</a>
-                    <a id="origami" onclick="changeStyle(3)">Origami</a>
-                    <a id="anime" onclick="changeStyle(4)">Anime</a>
-                    <a id="watercolor" onclick="changeStyle(5)">Watercolor</a>
-                    <a id="crayon" onclick="changeStyle(6)">Crayon</a>
+        <div id="inputAll">
+            <div id="input">
+                <textarea id="prompt" placeholder="Enter prompt here..."></textarea>
+                <br><br>
+                <div id="dropdown">
+                    <button id="dropbtn">Select Style</button>
+                    <div id="dropdown-content">
+                        <a id="nostyle" onclick="changeStyle(0)">No Style</a>
+                        <a id="photography" onclick="changeStyle(1)">Photography</a>
+                        <a id="embroidery" onclick="changeStyle(2)">Embroidery</a>
+                        <a id="origami" onclick="changeStyle(3)">Origami</a>
+                        <a id="anime" onclick="changeStyle(4)">Anime</a>
+                        <a id="watercolor" onclick="changeStyle(5)">Watercolor</a>
+                        <a id="crayon" onclick="changeStyle(6)">Crayon</a>
+                    </div>
                 </div>
+                <!-- !this was where the style selector is now! div id="logo"><p style="text-shadow: 2px 2px 5px black;">Pencil<span style="color: brown">2</span>Pixel</p></div-->
+                <div id="submit" onclick="generate()">Generate Images</div>
             </div>
-            <!-- !this was where the style selector is now! div id="logo"><p style="text-shadow: 2px 2px 5px black;">Pencil<span style="color: brown">2</span>Pixel</p></div-->
-            <div id="submit" onclick="generate()">Generate Images</div>
-        </div>
 
-        <div id="advanced-dropdown">
-            <div id="advanced-dropbtn-container">
-                <button id="advanced-dropbtn" onclick="toggleAdvancedDropdown()">Advanced Options<span
-                        id="dropdown-arrow">▼</span></button>
-            </div>
-            <div id="advanced-dropdown-content">
-
-                <div class="negPrompt-container">
-                    <p id="detaiText"
-                        data-tooltip="Enter a negative prompt to specify what you don't want to see in the generated image.">
-                        Negative Prompt:</p>
-                    <textarea id="negPrompt"
-                        placeholder="Enter negative prompt here...">extra digit, fewer digits, cropped, worst quality, low quality, glitch, deformed, mutated, ugly, disfigured</textarea>
+            <div id="advanced-dropdown">
+                <div id="advanced-dropbtn-container">
+                    <button id="advanced-dropbtn" onclick="toggleAdvancedDropdown()">Advanced Options<span
+                            id="dropdown-arrow">▼</span></button>
                 </div>
+                <div id="advanced-dropdown-content">
 
-                <div class="slider-container">
-                    <div class="detail-container">
+                    <div class="negPrompt-container">
                         <p id="detaiText"
-                            data-tooltip="Adjust the number of steps to control the level of detail in the generated image. A higher value means more detailed results.">
-                            Number of steps: <span id="detailValue">25</span></p>
-                        <span class="slider-label">0</span>
-                        <input title="increase / decrease detail value" type="range" min="0" max="50" value="25"
-                            step="1" class="slider" id="detailSlider">
-                        <span class="slider-label">50</span>
+                            data-tooltip="Enter a negative prompt to specify what you don't want to see in the generated image.">
+                            Negative Prompt:</p>
+                        <textarea id="negPrompt"
+                            placeholder="Enter negative prompt here...">extra digit, fewer digits, cropped, worst quality, low quality, glitch, deformed, mutated, ugly, disfigured</textarea>
                     </div>
 
-                    <div class="p-container">
-                        <p id="detaiText"
-                            data-tooltip="Adjust the guidance scale to control how closely the generated image follows the prompt. A higher value means the image will be more closely related to the prompt.">
-                            Guidance scale: <span id="pValue">7.5</span></p>
-                        <span class="slider-label">0</span>
-                        <input title="Prompt" type="range" min="0" max="15" value="7.5" step="0.5" class="slider"
-                            id="pSlider">
-                        <span class="slider-label">15</span>
+                    <div class="slider-container">
+                        <div class="detail-container">
+                            <p id="detaiText"
+                                data-tooltip="Adjust the number of steps to control the level of detail in the generated image. A higher value means more detailed results.">
+                                Number of steps: <span id="detailValue">25</span></p>
+                            <span class="slider-label">0</span>
+                            <input title="increase / decrease detail value" type="range" min="0" max="50" value="25"
+                                step="1" class="slider" id="detailSlider">
+                            <span class="slider-label">50</span>
+                        </div>
+
+                        <div class="p-container">
+                            <p id="detaiText"
+                                data-tooltip="Adjust the guidance scale to control how closely the generated image follows the prompt. A higher value means the image will be more closely related to the prompt.">
+                                Guidance scale: <span id="pValue">7.5</span></p>
+                            <span class="slider-label">0</span>
+                            <input title="Prompt" type="range" min="0" max="15" value="7.5" step="0.5" class="slider"
+                                id="pSlider">
+                            <span class="slider-label">15</span>
+                        </div>
+
+                        <div class="s-container">
+                            <p id="detaiText"
+                                data-tooltip="Adjust the adapter conditioning scale to control how much the generated image is influenced by the adapter. A higher value means the image will be more closely related to the adapter.">
+                                Adapter conditioning scale: <span id="sValue">0.6</span></p>
+                            <span class="slider-label">0</span>
+                            <input title="Sketch" type="range" min="0" max="1" value="0.6" step="0.1" class="slider"
+                                id="sSlider">
+                            <span class="slider-label">1</span>
+                        </div>
+
+                        <div>
+                            <p id="detaiText"
+                                data-tooltip="Select the number of images to generate. A higher value means more images will be generated.">
+                                Amount of generated images: <span id="MIValue">1</span></p>
+                            <span class="" slider-label>1</span>
+                            <input title="multiple images" type="range" min="1" max="4" value="1" step="1"
+                                class="slider" id="MISlider">
+                            <span class="" slider-label>4</span>
+                        </div>
+
                     </div>
 
-                    <div class="s-container">
-                        <p id="detaiText"
-                            data-tooltip="Adjust the adapter conditioning scale to control how much the generated image is influenced by the adapter. A higher value means the image will be more closely related to the adapter.">
-                            Adapter conditioning scale: <span id="sValue">0.6</span></p>
-                        <span class="slider-label">0</span>
-                        <input title="Sketch" type="range" min="0" max="1" value="0.6" step="0.1" class="slider"
-                            id="sSlider">
-                        <span class="slider-label">1</span>
-                    </div>
-
-                    <div>
-                        <p id="detaiText"
-                            data-tooltip="Select the number of images to generate. A higher value means more images will be generated.">
-                            Amount of generated images: <span id="MIValue">1</span></p>
-                        <span class="" slider-label>1</span>
-                        <input title="multiple images" type="range" min="1" max="4" value="1" step="1" class="slider"
-                            id="MISlider">
-                        <span class="" slider-label>4</span>
+                    <div id="defaultValues-container">
+                        <p>Reset to default values: <button onclick="setDefaults()" id="defaultBtn">↻</button></p>
                     </div>
 
                 </div>
-
-                <div id="defaultValues-container">
-                    <p>Reset to default values: <button onclick="setDefaults()" id="defaultBtn">↻</button></p>
-                </div>
-
             </div>
         </div>
 
@@ -167,7 +168,7 @@
         <div id="images" style="width: 400px; margin: auto; margin-top: 20px;"></div>
     </div> <!-- end of rightSide -->
 
-    
+
     <button type="button" class="icon">
         <div class="cloud">
             <div class="puff puff-1"></div>
@@ -197,7 +198,24 @@
         <div class="progress"></div>
     </button>
 
-    <button id="mode-toggle">Change to Lightmode</button>
+    <div id="darkmode-container">
+        <input class="inputDM" type="checkbox" id="mode-toggle" checked></input>
+        <label class="labelDM" for="mode-toggle">
+            <svg version="1.1" class="sun" width="800px" height="800px" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z"
+                    stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <svg version="1.1" class="moon" width="800px" height="800px" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z"
+                    stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </label>
+    </div>
+
 
     <script src="script.js" defer></script>
 </body>
