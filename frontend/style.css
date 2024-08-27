@@ -1000,7 +1000,7 @@ body.light-mode #submit, body.light-mode #canv, body.light-mode #prompt, body.li
   }
 
   #darkmode-container {
-    scale: 0.2;
+    scale: 0.175;
     position: absolute;
     top: -15px;
     right: 40px;
