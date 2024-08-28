@@ -8,6 +8,7 @@ var lineRadius = 5;
 var pos = { x: 0, y: 0 };
 var drawMode = true;
 let negPromptPY = "extra digit, fewer digits, cropped, worst quality, low quality, glitch, deformed, mutated, ugly, disfigured";
+var clrpalette = false;
 
 // Slidebars:
 // for python:
@@ -262,7 +263,6 @@ function generate() {
     const negative_prompt = negPromptPY;
     const adapter_conditioning_scale = sValuePY;
     const guidance_scale = pValuePY;
-    const clrpalette = false;
 
     const entry = {
         image: img,
@@ -474,6 +474,10 @@ document.getElementById("upload").addEventListener("click", function () {
     document.getElementById("fileInput").click();
 });
 
+document.getElementById("upload_palette").addEventListener("click", function () {
+    document.getElementById("fileInput_palette").click();
+});
+
 document.getElementById("fileInput").addEventListener("change", function (event) {
     var file = event.target.files[0];
     if (file) {
@@ -482,6 +486,19 @@ document.getElementById("fileInput").addEventListener("change", function (event)
             document.getElementById("upload").src = e.target.result;
         };
         reader.readAsDataURL(file);
+        console.log("Image uploaded.");
+    }
+});
+
+document.getElementById("fileInput_palette").addEventListener("change", function (event) {
+    var file = event.target.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            clrpalette = e.target.result;
+        };
+        reader.readAsDataURL(file);
+        console.log("palette uploaded.");
     }
 });
 

@@ -97,7 +97,7 @@ body {
     cursor: pointer;
 }
 
-#fileInput {
+#fileInput, #fileInput_palette {
     display: none;
 }
 
@@ -262,6 +262,33 @@ body {
 #toolsright {
     display: flex;
     justify-content: right;
+}
+
+#upload_palette {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    text-align: center;
+    height: 30px;
+    width: 400px;
+    background-color: brown;
+    border-radius: 5px;
+    box-shadow: 0px 0px 30px black;
+    color: white;
+    position:relative;
+    z-index:1;
+}
+
+#upload_palette:hover {
+    box-shadow: 0px 0px 10px inset black;
+    width: 398px;
+    height: 28px;
+    cursor: pointer;
+    margin-top: 16px;
+    margin-left: 2px;
+    font-size: 15.5px;
+    background-color: rgb(151, 39, 39);
 }
 
 #current {
