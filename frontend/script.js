@@ -68,8 +68,6 @@ function resetStates() {
     states = states_new;
 }
 
-
-
 function saveState() {
     // Limit the size of states array to avoid memory issues
     while (states.length > 50) {
@@ -458,8 +456,8 @@ function changeMode() {
             document.getElementById("modeUpload").style.color = "lightgray";
         }
 
-        document.getElementById("inputAll").style.marginLeft = "49px";
-        document.getElementById("rightSide").style.marginTop = "11px";
+        document.getElementById("inputAll").style.marginLeft = "50px";
+        // document.getElementById("rightSide").style.marginTop = "11px";
 
     }
 }
@@ -561,7 +559,6 @@ const body = document.body;
 // Prüfen, ob ein Modus in den lokalen Speicher gespeichert ist
 if (localStorage.getItem('mode') === 'light') {
     body.classList.add('light-mode');
-    toggleButton.textContent = 'Change to Darkmode';
 }
 
 // Eventlistener für den Moduswechsel
@@ -571,10 +568,8 @@ toggleButton.addEventListener('click', () => {
     body.classList.toggle('light-mode');
 
     if (body.classList.contains('light-mode')) {
-        toggleButton.textContent = 'Change to Darkmode';
         localStorage.setItem('mode', 'light');
     } else {
-        toggleButton.textContent = 'Change to Lightmode';
         localStorage.setItem('mode', 'dark');
     }
 });
@@ -584,17 +579,22 @@ function loadCurrentMode() {
         if (body.classList.contains('light-mode')) {
             document.getElementById("modeDraw").style.color = "grey";
             document.getElementById("modeUpload").style.color = "darkgrey";
+            document.querySelector('#mode-toggle').checked = false;
         } else {
             document.getElementById("modeDraw").style.color = "lightgray";
             document.getElementById("modeUpload").style.color = "grey";
+            document.querySelector('#mode-toggle').checked = true;
         }
     } else {
         if (body.classList.contains('light-mode')) {
             document.getElementById("modeDraw").style.color = "darkgrey";
             document.getElementById("modeUpload").style.color = "gray";
+            document.querySelector('#mode-toggle').checked = false;
         } else {
             document.getElementById("modeDraw").style.color = "grey";
             document.getElementById("modeUpload").style.color = "lightgray";
+            document.querySelector('#mode-toggle').checked = true;
+
         }
 
     }
