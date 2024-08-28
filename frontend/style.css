@@ -931,6 +931,23 @@ body.light-mode #submit, body.light-mode #canv, body.light-mode #prompt, body.li
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.682);
 }
 
+body.light-mode .fade_rule {
+    height: 1px;
+    background-color: rgb(40,40,40);
+    width: 100%;
+    margin: 0 auto;
+    background-image: linear-gradient(left, lightgray 2%, rgb(40,40,40) 50%, lightgray 98%);
+    background-image: -o-linear-gradient(left, lightgray 2%, rgb(40,40,40) 50%, lightgray 98%);
+    background-image: -moz-linear-gradient(left, lightgray 2%, rgb(40,40,40) 50%, lightgray 98%);
+    background-image: -webkit-linear-gradient(left, lightgray 2%, rgb(40,40,40) 50%, lightgray 98%);
+    background-image: -ms-linear-gradient(left, lightgray 2%, rgb(40,40,40) 50%, lightgray 98%);
+    background-image: -webkit-gradient(linear, left bottom, right bottom,
+                    color-stop(0.02, lightgray),
+                    color-stop(0.5, rgb(40,40,40)),
+                    color-stop(0.98, lightgray));
+}
+
+
 /* TOGGLE BUTTON FOR DARKMODE */
 .labelDM {
     width:500px;
