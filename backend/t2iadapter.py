@@ -38,11 +38,13 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
         num_inference_steps = int(num_inference_steps)
         adapter_conditioning_scale = float(adapter_conditioning_scale)
         guidance_scale = float(guidance_scale)
+        
+        resultArray = []
 
         while i > 0:
 
              # Generate images
-            generated_images = pipe(
+            generated_image = pipe(
                 prompt=prompt,
                 negative_prompt=negative_prompt,
                 image=image,
@@ -52,12 +54,11 @@ def run(image, prompt, styles, amountOfImages, num_inference_steps, negative_pro
             ).images[0]
 
             #Array to return images
-            resultArray = []
-            resultArray.append(generated_images)
+            resultArray.append(generated_image)
 
             print("Generated image successfully")
         
-            generated_images.save('test_multipleadapters' + str(i) + '.png')
+            generated_image.save('test_multipleadapters' + str(i) + '.png')
             i -= 1
             print("Image saved successfully")
 

@@ -290,8 +290,8 @@ function generate() {
 
     XHR.done(function (data) {
         const images = data.images;
-
-        updateGrid(images.length);
+        
+        updateGrid(String(images.length));
 
         const imgOutDivs = document.querySelectorAll("#rightSide .imgOut");
 

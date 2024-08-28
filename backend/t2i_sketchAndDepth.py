@@ -63,10 +63,12 @@ def run_sketchAndDepth(image, prompt, styles, amountOfImages, num_inference_step
         image.save('extractedSketch.png')
         depth_image.save('extractedDepth.png')
 
+        resultArray = []
+        
         while i > 0:
 
              # Generate images
-            gen_images = pipe(
+            gen_image = pipe(
                 prompt=prompt,
                 negative_prompt=negative_prompt,
                 # load multiple images from array corresponding with their adapters
@@ -77,12 +79,11 @@ def run_sketchAndDepth(image, prompt, styles, amountOfImages, num_inference_step
                 guidance_scale=guidance_scale,
             ).images[0]
 
-            resultArray = []
-            resultArray.append(gen_images)
+            resultArray.append(gen_image)
 
             print("Generated image successfully")
 
-            gen_images.save('sketchAndDepth' + str(i) + '.png')
+            gen_image.save('sketchAndDepth' + str(i) + '.png')
             i -= 1
             print("Image saved successfully")
 
