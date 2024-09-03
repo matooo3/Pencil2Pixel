@@ -278,6 +278,7 @@ body {
     color: white;
     position:relative;
     z-index:1;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 #upload_palette:hover {
@@ -287,6 +288,7 @@ body {
     cursor: pointer;
     margin-top: 16px;
     margin-left: 2px;
+    margin-bottom: 2px;
     font-size: 15.5px;
     background-color: rgb(151, 39, 39);
 }
