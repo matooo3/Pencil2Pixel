@@ -288,23 +288,30 @@ function generate() {
 
     XHR.done(function (data) {
         const images = data.images;
+        
+        updateGrid(String(images.length));
 
-        // Append the image to the DOM
-        const parent = document.getElementById("images");
-        parent.innerHTML = "";
-        images.forEach((object) => {
-            // Create image element
-            const image = document.createElement("img");
-            // Set source of the image to the received base64 encoded image data
-            image.src = "data:image/png;base64," + object;
-            parent.appendChild(image);
-        });
+        const imgOutDivs = document.querySelectorAll("#rightSide .imgOut");
+
+        if (imgOutDivs.length >= images.length) {
+            images.forEach((object, index) => {
+                const imgDiv = imgOutDivs[index];
+                const image = document.createElement("img");
+                image.src = "data:image/png;base64," + object;
+                image.style.width = "100%";
+                image.style.height = "100%";
+                imgDiv.appendChild(image);
+                imgDiv.style.border = "none"
+            });
+        } else {
+            console.error("Not enough imgOut divs to place all images.");
+        }
 
         console.log("AJAX request successful.");
         saveState();
     });
 
-    XHR.fail(function (XHR, textStatus, errorThrown) {
+    XHR.fail(function (textStatus, errorThrown) {
         console.error("Error:", textStatus, errorThrown);
     });
 
@@ -361,9 +368,61 @@ document.addEventListener('DOMContentLoaded', (event) => {
     MISlider.addEventListener('input', () => {
         MIValue.textContent = MISlider.value;
         MIValuePY = MISlider.value;
+
+        updateGrid(MIValuePY);
+
     })
 
 });
+
+
+function updateGrid(x) {
+
+    output = document.getElementById("rightSide");
+
+    output.innerHTML = "";
+
+    switch(x) {
+        case "1":
+            output.innerHTML = "<div class='imgOut' style='width:396px;height:396px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>";
+            output.style.display = 'flex';
+            output.style.flexDirection = 'column';
+            output.style.alignItems = 'center';
+            break;
+        case "2":
+            output.innerHTML = "<div class='imgOut' style='width:176px;height:176px;margin:10px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>\
+                                <div class='imgOut' style='width:176px;height:176px;margin:10px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>";
+            output.style.display = 'flex';
+            output.style.flexDirection = 'column';
+            output.style.alignItems = 'center';
+            break;
+        case "3":
+            output.innerHTML = "<div class='pyramid-row' style='justify-content: center;'>\
+                                    <div class='imgOut' style='width:176px;height:176px;margin:10px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>\
+                                </div>\
+                                <div class='pyramid-row' style='justify-content: space-between;'>\
+                                    <div class='imgOut' style='width:176px;height:176px;margin:10px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>\
+                                    <div class='imgOut' style='width:176px;height:176px;margin:10px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>\
+                                </div>";
+            output.style.display = 'flex';
+            output.style.flexDirection = 'column';
+            output.style.alignItems = 'center';
+            break;
+        case "4":
+            output.innerHTML = "<div class='imgOut' style='width:176px;height:176px;margin:10px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>\
+                                <div class='imgOut' style='width:176px;height:176px;margin:10px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>\
+                                <div class='imgOut' style='width:176px;height:176px;margin:10px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>\
+                                <div class='imgOut' style='width:176px;height:176px;margin:10px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>";
+            output.style.display = 'grid';
+            break;
+        default:
+            output.innerHTML = "<div class='imgOut' style='width:400px;height:400px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>";
+            output.style.display = 'flex';
+            output.style.flexDirection = 'column';
+            output.style.alignItems = 'center';
+            break;
+    }
+}
 
 
 function toggleAdvancedDropdown() {
@@ -519,22 +578,24 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 1800);
         }
         // Finde den Container, der die Bilder enthält
-        const imagesContainer = document.getElementById('images');
+        const imagesContainer = document.getElementById('rightSide');
 
-        // Finde das erste Bild innerhalb des Containers
-        const firstImage = imagesContainer.querySelector('img');
+        // Finde alle Bilder innerhalb des Containers
+        const images = imagesContainer.querySelectorAll('img');
 
-        // Prüfen, ob ein Bild gefunden wurde
-        if (firstImage) {
-            // Erstelle einen Link zum Herunterladen des Bildes
-            const link = document.createElement('a');
-            link.href = firstImage.src;
-            link.download = 'picture_1.jpg'; // Name des heruntergeladenen Bildes
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        // Prüfen, ob Bilder gefunden wurden
+        if (images.length > 0) {
+            images.forEach((image, index) => {
+                // Erstelle einen Link zum Herunterladen jedes Bildes
+                const link = document.createElement('a');
+                link.href = image.src;
+                link.download = `picture_${index + 1}.jpg`; // Name des heruntergeladenen Bildes (nummeriert)
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
         } else {
-            console.log('Kein Bild gefunden.');
+            console.log('Keine Bilder gefunden.');
         }
     });
 });

@@ -485,12 +485,24 @@ body {
 #rightSide {
     position: absolute;      
     right: 15%;
-    margin-top: 41px;
-    border: 4px dotted rgb(255, 255, 255); /* Reihenfolge: Breite, Stil, Farbe */
-    border-radius: 10px;
+    margin-top: 71px;
     width: 400px;
     height: 400px;
-    
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+.pyramid-row {
+    display: flex;
+    width: 100%;
+}
+
+.pyramid-row:first-child {
+    justify-content: center;
+}
+
+.pyramid-row:last-child {
+    justify-content: space-between;
 }
 
 #downloadButton {

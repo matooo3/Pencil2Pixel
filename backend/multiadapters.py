@@ -42,10 +42,13 @@ def run_multiadapter(image, colorpalette, prompt, amountOfImages, num_inference_
         num_inference_steps = int(num_inference_steps)
         adapter_conditioning_scale = float(adapter_conditioning_scale)
         guidance_scale = float(guidance_scale)
+
+        resultArray = []
+        
         #while loop that generates images, i = amount of images the user wants to generate
         while i > 0:           
              # Generate images
-            generated_images = pipe(
+            generated_image = pipe(
                 prompt=prompt,
                 negative_prompt=negative_prompt,
                 # load multiple images from array corresponding with their adapters
@@ -57,12 +60,11 @@ def run_multiadapter(image, colorpalette, prompt, amountOfImages, num_inference_
             ).images[0]
             
             #Array to return images
-            resultArray = []
-            resultArray.append(generated_images)
+            resultArray.append(generated_image)
 
             print("Generated image successfully")
         
-            generated_images.save('multiadapters_extrascript' + str(i) + '.png')
+            generated_image.save('multiadapters_extrascript' + str(i) + '.png')
             i -= 1
             print("Image saved successfully")
 
