@@ -303,6 +303,7 @@ function generate() {
                 image.style.width = "100%";
                 image.style.height = "100%";
                 imgDiv.appendChild(image);
+                imgDiv.style.border = "none"
             });
         } else {
             console.error("Not enough imgOut divs to place all images.");
@@ -385,39 +386,39 @@ function updateGrid(x) {
 
     switch(x) {
         case "1":
-            output.innerHTML = "<div class='imgOut' style='width:396px;height:396px'></div>";
+            output.innerHTML = "<div class='imgOut' style='width:396px;height:396px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>";
             output.style.display = 'flex';
             output.style.flexDirection = 'column';
             output.style.alignItems = 'center';
             break;
         case "2":
-            output.innerHTML = "<div class='imgOut' style='width:176px;height:176px;margin:10px'></div>\
-                                <div class='imgOut' style='width:176px;height:176px;margin:10px'></div>";
+            output.innerHTML = "<div class='imgOut' style='width:176px;height:176px;margin:10px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>\
+                                <div class='imgOut' style='width:176px;height:176px;margin:10px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>";
             output.style.display = 'flex';
             output.style.flexDirection = 'column';
             output.style.alignItems = 'center';
             break;
         case "3":
             output.innerHTML = "<div class='pyramid-row' style='justify-content: center;'>\
-                                    <div class='imgOut' style='width:176px;height:176px;margin:10px'></div>\
+                                    <div class='imgOut' style='width:176px;height:176px;margin:10px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>\
                                 </div>\
                                 <div class='pyramid-row' style='justify-content: space-between;'>\
-                                    <div class='imgOut' style='width:176px;height:176px;margin:10px'></div>\
-                                    <div class='imgOut' style='width:176px;height:176px;margin:10px'></div>\
+                                    <div class='imgOut' style='width:176px;height:176px;margin:10px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>\
+                                    <div class='imgOut' style='width:176px;height:176px;margin:10px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>\
                                 </div>";
             output.style.display = 'flex';
             output.style.flexDirection = 'column';
             output.style.alignItems = 'center';
             break;
         case "4":
-            output.innerHTML = "<div class='imgOut' style='width:176px;height:176px;margin:10px'></div>\
-                                <div class='imgOut' style='width:176px;height:176px;margin:10px'></div>\
-                                <div class='imgOut' style='width:176px;height:176px;margin:10px'></div>\
-                                <div class='imgOut' style='width:176px;height:176px;margin:10px'></div>";
+            output.innerHTML = "<div class='imgOut' style='width:176px;height:176px;margin:10px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>\
+                                <div class='imgOut' style='width:176px;height:176px;margin:10px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>\
+                                <div class='imgOut' style='width:176px;height:176px;margin:10px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>\
+                                <div class='imgOut' style='width:176px;height:176px;margin:10px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>";
             output.style.display = 'grid';
             break;
         default:
-            output.innerHTML = "<div class='imgOut' style='width:400px;height:400px'></div>";
+            output.innerHTML = "<div class='imgOut' style='width:400px;height:400px;border:2px dashed rgb(255, 255, 255);border-radius: 10px;box-shadow: 0px 0px 40px;'></div>";
             output.style.display = 'flex';
             output.style.flexDirection = 'column';
             output.style.alignItems = 'center';
