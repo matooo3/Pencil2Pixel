@@ -564,20 +564,22 @@ document.addEventListener("DOMContentLoaded", function () {
         // Finde den Container, der die Bilder enthält
         const imagesContainer = document.getElementById('rightSide');
 
-        // Finde das erste Bild innerhalb des Containers
-        const firstImage = imagesContainer.querySelector('img');
+        // Finde alle Bilder innerhalb des Containers
+        const images = imagesContainer.querySelectorAll('img');
 
-        // Prüfen, ob ein Bild gefunden wurde
-        if (firstImage) {
-            // Erstelle einen Link zum Herunterladen des Bildes
-            const link = document.createElement('a');
-            link.href = firstImage.src;
-            link.download = 'picture_1.jpg'; // Name des heruntergeladenen Bildes
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        // Prüfen, ob Bilder gefunden wurden
+        if (images.length > 0) {
+            images.forEach((image, index) => {
+                // Erstelle einen Link zum Herunterladen jedes Bildes
+                const link = document.createElement('a');
+                link.href = image.src;
+                link.download = `picture_${index + 1}.jpg`; // Name des heruntergeladenen Bildes (nummeriert)
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
         } else {
-            console.log('Kein Bild gefunden.');
+            console.log('Keine Bilder gefunden.');
         }
     });
 });
