@@ -1,6 +1,6 @@
 from diffusers import StableDiffusionAdapterPipeline, MultiAdapter, T2IAdapter, EulerAncestralDiscreteScheduler, AutoencoderKL
 from diffusers.utils import load_image, make_image_grid
-from controlnet_aux.pidi import PidiNetDetector
+from controlnet_aux import MidasDetector
 from PIL import Image
 import torch
 
@@ -8,7 +8,7 @@ import torch
 def run_multiadapter(image, colorpalette, prompt, amountOfImages, num_inference_steps, negative_prompt, adapter_conditioning_scale, guidance_scale):
     # load 2 adapters (color adapter and depth) with MultiAdapter function
     adapters = MultiAdapter(
-        [T2IAdapter.from_pretrained("TencentARC/t2iadapter_zoedepth_sd15v1", torch_dtype=torch.float16),
+        [T2IAdapter.from_pretrained("TencentARC/t2iadapter_depth_sd14v1", torch_dtype=torch.float16),
          T2IAdapter.from_pretrained("TencentARC/t2iadapter_color_sd14v1", torch_dtype=torch.float16)
         ]).to(torch.float16)
 
@@ -32,8 +32,14 @@ def run_multiadapter(image, colorpalette, prompt, amountOfImages, num_inference_
 
     #loading depth image and downsizing it for better performance and compatibility
     depth_image = image
-    depth_image = depth_image.resize((512, 512), resample=Image.Resampling.NEAREST) # pil image 512,512
-    depth_image.save('weird_sketch.png')
+    '''midas_depth = MidasDetector.from_pretrained(
+     "valhalla/t2iadapter-aux-models", filename="dpt_large_384.pt", model_type="dpt_large"
+    ).to("cuda")'''
+    midas_depth = MidasDetector.from_pretrained("lllyasviel/Annotators")
+    depth_image = midas_depth(image)
+
+    depth_image = depth_image.resize((512, 512), resample=Image.Resampling.NEAREST) # pil image 512,512   
+    depth_image.save('weird_sketch.png') 
     
 
     try:
