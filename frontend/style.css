@@ -485,7 +485,7 @@ body {
 #rightSide {
     position: absolute;      
     right: 15%;
-    margin-top: 71px;
+    margin-top: 73px;
     width: 400px;
     height: 400px;
     display: grid;
@@ -951,10 +951,9 @@ body.light-mode #middleSide{
     color: rgb(68, 68, 68);
 }
 
-body.light-mode #rightSide{
+/* body.light-mode #rightSide{
     border: 4px dotted rgb(68, 68, 68);
-    
-}
+} */
 
 /* Advanced Options */
 body.light-mode #advanced-dropdown{

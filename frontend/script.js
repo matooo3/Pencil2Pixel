@@ -487,7 +487,7 @@ function setDefaults() {
 function changeMode() {
     const body = document.body;
     drawMode = !drawMode;
-    if (drawMode) {
+    if (drawMode) { //draw part:
         document.getElementById("mode1").style.display = "";
         document.getElementById("mode2").style.display = "none";
         document.getElementById("mode").style.marginBottom = "";
@@ -501,9 +501,10 @@ function changeMode() {
         }
 
         document.getElementById("inputAll").style.marginLeft = "0px";
-        document.getElementById("rightSide").style.marginTop = "41px";
+        document.getElementById("rightSide").style.marginTop = "73px";
+        document.getElementById("leftSide").style.marginTop = "0px";
 
-    } else {
+    } else { //upload part:
         document.getElementById("mode1").style.display = "none";
         document.getElementById("mode2").style.display = "";
 
@@ -515,8 +516,12 @@ function changeMode() {
             document.getElementById("modeUpload").style.color = "lightgray";
         }
 
-        document.getElementById("inputAll").style.marginLeft = "50px";
+        document.getElementById("inputAll").style.marginLeft = "49.5px";
         // document.getElementById("rightSide").style.marginTop = "11px";
+
+        // this is for left side fix, when pressing upload:
+        document.getElementById("leftSide").style.marginTop = "-30px";
+
 
     }
 }
@@ -645,12 +650,18 @@ toggleButton.addEventListener('click', () => {
     document.getElementById("modeUpload").style.color = "darkgrey";
     body.classList.toggle('light-mode');
 
+    saveModeAndBorder();
+});
+
+function saveModeAndBorder() {
     if (body.classList.contains('light-mode')) {
         localStorage.setItem('mode', 'light');
+        // document.querySelector('.imgOut').style.border = '2px dashed rgb(0, 0, 0)';
     } else {
         localStorage.setItem('mode', 'dark');
+        // document.querySelector('.imgOut').style.border = '2px dashed rgb(255, 255, 255)';
     }
-});
+}
 
 function loadCurrentMode() {
     if (drawMode) {
@@ -658,21 +669,24 @@ function loadCurrentMode() {
             document.getElementById("modeDraw").style.color = "grey";
             document.getElementById("modeUpload").style.color = "darkgrey";
             document.querySelector('#mode-toggle').checked = false;
+            // document.querySelector('.imgOut').style.border = '2px dashed rgb(0, 0, 0)';
         } else {
             document.getElementById("modeDraw").style.color = "lightgray";
             document.getElementById("modeUpload").style.color = "grey";
             document.querySelector('#mode-toggle').checked = true;
+            // document.querySelector('.imgOut').style.border = '2px dashed rgb(255, 255, 255)';
         }
     } else {
         if (body.classList.contains('light-mode')) {
             document.getElementById("modeDraw").style.color = "darkgrey";
             document.getElementById("modeUpload").style.color = "gray";
             document.querySelector('#mode-toggle').checked = false;
-        } else {
+            // document.querySelector('.imgOut').style.border = '2px dashed rgb(0, 0, 0)';
+    } else {
             document.getElementById("modeDraw").style.color = "grey";
             document.getElementById("modeUpload").style.color = "lightgray";
             document.querySelector('#mode-toggle').checked = true;
-
+            // document.querySelector('.imgOut').style.border = '2px dashed rgb(255, 255, 255)';
         }
 
     }
